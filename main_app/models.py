@@ -24,6 +24,7 @@ class Profile(models.Model):
 class Post(models.Model):
 	title = models.CharField(max_length=100)
 	content = models.TextField(max_length=250)
+	# add city and author
 
 # City Model
 class City(models.Model):
