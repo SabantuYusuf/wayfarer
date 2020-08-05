@@ -9,6 +9,7 @@ from django.db.models.signals import post_save
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	# city = models.CharField(max_length=100)
+<<<<<<< HEAD
 	# date = models.DateField('Join Date')
 
 	@receiver(post_save, sender=User)
@@ -19,6 +20,18 @@ class Profile(models.Model):
 	@receiver(post_save, sender=User)
 	def save_user_profile(sender, instance, **kwargs):
     	instance.profile.save()
+=======
+	# date = models.DateField('join date')
+	
+	@receiver(post_save, sender=User)
+	def create_user_profile(sender, instance, created, **kwargs):
+		if created:
+			Profile.objects.create(user=instance)
+	
+	@receiver(post_save, sender=User)
+	def save_user_profile(sender, instance, **kwargs):
+		instance.profile.save()
+>>>>>>> submaster
 
 # Post Model
 class Post(models.Model):

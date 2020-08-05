@@ -2,6 +2,8 @@
 {% block content %}
 
 <!-- <h1> {{ user.name }} </h1> -->
+{% csrf_token %}
 <h1> Profile Page </h1>
+{{ profile.user }}
 
 {% endblock %}
