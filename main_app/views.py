@@ -3,7 +3,7 @@ from .models import Profile, Post
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login as auth_login
+from django.contrib.auth import login as login
 
 
 # Create your views here.
@@ -28,8 +28,8 @@ def signup(request):
     form = UserCreationForm(request.POST)
     if form.is_valid():
       user = form.save()
-      auth_login(request, user)
-      return redirect('profile', user_id)
+      login(request, user)
+      return redirect('profile', user.id)
     else:
       error_message = 'Invalid sign up - try again'
   form = UserCreationForm()
@@ -38,9 +38,9 @@ def signup(request):
 
 # Profile
 def profile(request, user_id):
-  user = User.objects.get(id=user_id)
+  current_user = Profile.objects.get(user=user_id)
   context = {
-    'user': User
+    'profile': current_user
   }
   return render(request, 'users/profile.html', context)
 
