@@ -8,4 +8,5 @@ urlpatterns =[
 	path('signup/', views.signup, name='signup'),
 	# City Routes
 	path('cities/', views.cities, name='cities'),
+	path('users/<int:user_id>', views.profile, name='profile')
 ]
