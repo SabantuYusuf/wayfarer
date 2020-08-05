@@ -26,8 +26,6 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 
-# def login(request):
-# 	return render(request, 'registration/login.html')
 
 # City Route
 def cities(request):
