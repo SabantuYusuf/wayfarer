@@ -14,22 +14,28 @@
 
 <body>
 	<nav class="navbar">
-	  <a class="navbar-brand" href="{% url 'home' %}">
-	    Wayfarer
-	  </a>
-	<a href="{% url 'signup' %}">Sign Up</a>
-	<a href="{% url 'login' %}">Log In</a>
-
-
+		<a class="navbar-brand" href="{% url 'home' %}">Wayfarer</a>
+		<ul class="navbar-nav ml-auto">
+		  	<li class="nav-item">
+				<a href="{% url 'signup' %}">Sign Up</a>
+		  	</li>
+			<li class="nav-item">
+		  		<a href="{% url 'login' %}">Log In</a>
+			</li>
+		</ul>
 	</nav>
 
-	<main class ="container">
+	<main>
 		{% block content %}
 		{% endblock%}
 	</main>
 
-	<footer class="page-footer">
-        <div class="copyright">Copyright &copy; <script>document.write(new Date().getFullYear())</script> Ally Pittman, Kaila Moreno, Sabantu Yusuf</div>
+	<footer id="footer">
+        <div class="containter-fluid">
+				<p> 
+					Copyright &copy; <script>document.write(new Date().getFullYear())</script> Ally Pittman, Kaila Moreno, Sabantu Yusuf
+				</p>
+		</div>
     </footer>
 
 
