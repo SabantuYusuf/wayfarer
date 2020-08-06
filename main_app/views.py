@@ -5,7 +5,9 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as login
-from .forms import UserRegisterForm, ProfileRegisterForm, PostForm
+from .forms import UserRegisterForm, ProfileRegisterForm, EditProfile, PostForm
+
+
 
 
 # Create your views here.
@@ -26,9 +28,12 @@ from .forms import UserRegisterForm, ProfileRegisterForm, PostForm
 
 # Home
 def home(request):
+
 	return render(request, 'home.html')
 
 # User Routes
+
+# Sign Up
 def signup(request):
   error_message = ''
   form = UserRegisterForm(request.POST)
@@ -40,7 +45,8 @@ def signup(request):
       profile.user = user
       profile.save()
       login(request, user)
-      return redirect('profile', user.id)
+      # return redirect('profile', user.id)
+      return redirect('profile')
     else:
       error_message = 'Invalid sign up - try again'
       form = UserRegisterForm()
@@ -52,18 +58,44 @@ def signup(request):
   }
   return render(request, 'registration/signup.html', context)
 
+
 # Profile
-# def profile(request, user_id, #post_id):
-def profile(request, user_id):
-  current_user = Profile.objects.get(user=user_id)
-  posts = Post.objects.filter(user=request.user)
-  print(posts)
+# def profile(request, user_id):
+def profile(request):
+  # print(f"user_id {user_id}")
+  # current_user = Profile.objects.all().filter(username=request.user)
+  # current_user = Profile.objects.get(user=user_id)
+  user = request.user
+  print(user)
+  current_user = Profile.objects.get(user=user)
+  posts = Post.objects.filter(user=user)
+  print(f"current_user {current_user}")
+#   print(current_user.date_joined)
+
   context = {
     'profile': current_user,
     'posts': posts
   }
   return render(request, 'users/profile.html', context)
 
+# Edit Profile
+def edit_profile(request, user_id):
+  current_profile = Profile.objects.get(user=user_id)
+  if request.method == 'POST':
+    form = UserRegisterForm(request.POST)
+    p_form = ProfileRegisterForm(request.POST, instance=current_profile)
+    if form.is_valid() and p_form.is_valid():
+      user = form.save()
+      profile = p_form.save(commit=False)
+      profile.user = user
+      profile.save()
+      return redirect('profile', user.id)
+  else:
+    form = UserRegisterForm(request.POST)
+    p_form = ProfileRegisterForm(request.POST, instance=current_profile)
+  return render(request, 'users/edit.html', {'form': form, 'p_form': p_form})
+
+# Post Routes
 
 # Create (New) Post Route
 def new_post(request):
@@ -91,43 +123,63 @@ def post(request, post_id):
   print(post)
   return render(request, 'posts2/postsshow.html', context)
 
-# Post Index Page (Delete Later - Just for Testing)
-# def post(request):
-#   posts = Post.objects.filter(user=request.user)
-#   context = {
-#     'posts': posts
-#   }
-#   return render(request, 'users/profile.html', context)
 
-# Add Posts Route
-# def assoc_posts(request, user_id, post_id):
-#   user = Profile.objects.get(user=user_id)
-#   post = Post.objects.get(id=post_id)
-#   user.posts.add(post)
-#   return redirect('profile', user_id)
+# Delete Post
+def delete_post(request, post_id):
+  Post.objects.get(id=post_id).delete()
+  return redirect('home')
+  #works, but edit code to redirect to profile
+
 
 
 # City Routes
+
 def cities(request):
-	return render(request, 'cities.html')
+	return render(request, 'cities/citydefault.html')
+
 
 def london(request):
   return render(request, 'cities/london.html')
 
-# edit route
-def edit_profile(request, user_id):
-  current_profile = Profile.objects.get(user=user_id)
+def sanfran(request):
+  return render(request, 'cities/sanfran.html')
+
+def seattle(request):
+  return render(request, 'cities/seattle.html')
+
+def sydney(request):
+  return render(request, 'cities/sydney.html')
+
+
+# Edit Profile
+# def edit_profile(request, user_id):
+def edit_profile(request):
+  # current_profile = Profile.objects.get(user=user_id)
+  user = request.user
+  current_profile = Profile.objects.get(user=user)
+
   if request.method == 'POST':
-    form = UserRegisterForm(request.POST)
+    form = EditProfile(request.POST, instance=user)
+    # print(form)
     p_form = ProfileRegisterForm(request.POST, instance=current_profile)
+    # print(p_form)
     if form.is_valid() and p_form.is_valid():
       user = form.save()
-      profile = p_form.save(commit=False)
-      profile.user = user
-      profile.save()
-      return redirect('profile', user.id)
+      print(f"USER {user}")
+      profile = p_form.save()
+
+      # profile.user = user
+      
+      # print(f"PROFILE.USER {profile.user}")
+
+      # profile.save()
+      # user.id = current_profile.id
+      # return redirect('profile', profile.user.id)
+      login(request, user)
+      return redirect('profile')
   else:
-    form = UserRegisterForm(request.POST)
-    p_form = ProfileRegisterForm(request.POST, instance=current_profile)
+    form = EditProfile(instance=user)
+    p_form = ProfileRegisterForm( instance=current_profile)
   return render(request, 'users/edit.html', {'form': form, 'p_form': p_form})
+
 

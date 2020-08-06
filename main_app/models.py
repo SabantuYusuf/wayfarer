@@ -16,13 +16,10 @@ class Post(models.Model):
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	city = models.CharField("City", max_length=85, blank=True)
-	# post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
 
 # City Model
 class City(models.Model):
 	name = models.CharField(max_length=100)
 	# image = models.ImageField() 
 	# install pillow
-
-
-
