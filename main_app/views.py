@@ -62,19 +62,26 @@ def cities(request):
 
 
 
-# Edit Profile
-def edit_profile(request, profile_id):
-  profile = Profile.objects.get(id=profile_id)
+# Edit User Profile
+def edit_profile(request, user_id):
+  current_profile = Profile.objects.get(user=user_id)
 
   if request.method == 'POST':
-    form = UserRegisterForm(request.POST, instance=profile)
-    if form.is_valid():
-      profile = form.save()
-      return redirect('profile', profile.id)
+    form = UserRegisterForm(request.POST)
+    p_form = ProfileRegisterForm(request.POST, instance=current_profile)
+    if form.is_valid() and p_form.is_valid():
+      user = form.save()
+      profile = p_form.save(commit=False)
+      profile.user = user
+      profile.save()
+      return redirect('profile', user.id)
 
   else:
-    form = UserRegisterForm(instance=profile)
-    return render(request, 'users/edit.html', {'form': form})
+    form = UserRegisterForm(request.POST)
+    p_form = ProfileRegisterForm(request.POST, instance=current_profile)    
+    
+    return render(request, 'users/edit.html', {'form': form, 'p_form': p_form})
+    
 
 
     
