@@ -50,9 +50,10 @@ def signup(request):
 
 # Profile
 def profile(request, user_id):
-  current_user = Profile.objects.get(user=user_id)
+  current_user = User.objects.get(id=user_id)
+#   print(current_user.date_joined)
   context = {
-    'profile': current_user
+    'profile': current_user,
   }
   return render(request, 'users/profile.html', context)
 
