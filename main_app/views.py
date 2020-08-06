@@ -4,7 +4,8 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as login
-from .forms import UserRegisterForm, ProfileRegisterForm
+from .forms import UserRegisterForm, ProfileRegisterForm, EditProfile
+
 
 
 # Create your views here.
@@ -20,6 +21,7 @@ from .forms import UserRegisterForm, ProfileRegisterForm
 
 
 def home(request):
+
 	return render(request, 'home.html')
 
 # User Routes
@@ -34,7 +36,8 @@ def signup(request):
       profile.user = user
       profile.save()
       login(request, user)
-      return redirect('profile', user.id)
+      # return redirect('profile', user.id)
+      return redirect('profile')
     else:
       error_message = 'Invalid sign up - try again'
       form = UserRegisterForm()
@@ -48,10 +51,14 @@ def signup(request):
 
 
 # Profile
-def profile(request, user_id):
-  print(f"user_id {user_id}")
+# def profile(request, user_id):
+def profile(request):
+  # print(f"user_id {user_id}")
   # current_user = Profile.objects.all().filter(username=request.user)
-  current_user = Profile.objects.get(user=user_id)
+  # current_user = Profile.objects.get(user=user_id)
+  user = request.user
+  print(user)
+  current_user = Profile.objects.get(user=user)
   print(f"current_user {current_user}")
 #   print(current_user.date_joined)
   context = {
@@ -69,24 +76,33 @@ def london(request):
   return render(request, 'cities/london.html')
 
 # Edit Profile
-def edit_profile(request, user_id):
-  current_profile = Profile.objects.get(user=user_id)
+# def edit_profile(request, user_id):
+def edit_profile(request):
+  # current_profile = Profile.objects.get(user=user_id)
+  user = request.user
+  current_profile = Profile.objects.get(user=user)
   if request.method == 'POST':
-    form = UserRegisterForm(request.POST)
+    form = EditProfile(request.POST, instance=user)
     # print(form)
     p_form = ProfileRegisterForm(request.POST, instance=current_profile)
     # print(p_form)
     if form.is_valid() and p_form.is_valid():
       user = form.save()
       print(f"USER {user}")
-      profile = p_form.save(commit=False)
-      profile.user = user
-      print(f"PROFILE.USER {profile.user}")
-      profile.save()
-      return redirect('profile', profile.user.id)
+      profile = p_form.save()
+
+      # profile.user = user
+      
+      # print(f"PROFILE.USER {profile.user}")
+
+      # profile.save()
+      # user.id = current_profile.id
+      # return redirect('profile', profile.user.id)
+      login(request, user)
+      return redirect('profile')
   else:
-    form = UserRegisterForm(request.POST)
-    p_form = ProfileRegisterForm(request.POST, instance=current_profile)
+    form = EditProfile(instance=user)
+    p_form = ProfileRegisterForm( instance=current_profile)
   return render(request, 'users/edit.html', {'form': form, 'p_form': p_form})
 
 
