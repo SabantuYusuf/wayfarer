@@ -13,10 +13,14 @@ main {
     display: flex;
 }
 
+.navbar-brand {
+    width: 60%;
+}
+
 .navbar-end {
     margin-top: auto;
     margin-bottom: auto;
-    margin-left: auto;
+    
     float: right;
 }
 
@@ -53,6 +57,10 @@ main {
 .post-container {
     display: flex;
     flex-direction: row;
+}
+
+.active {
+    background: lightblue;
 }
 
 /* Homepage */

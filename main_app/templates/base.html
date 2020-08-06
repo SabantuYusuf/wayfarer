@@ -24,11 +24,12 @@
 <body>
 	<nav class="navbar" role="navigation" aria-label="main navigation">
 		<div class="navbar-brand">
-			<a class="navbar-item" href="{% url 'home' %}"><img class="logo" src="../static/images/logo.png"/>Wayfarer</a>
+			<a class="navbar-item home-link" href="{% url 'home' %}"><img class="logo" src="../static/images/logo.png"/>Wayfarer</a>
 		</div>
 		<div class="navbar-end">
 			{% if user.is_authenticated %}
 			<a class="navbar-item" href="{% url 'cities' %}">Cities</a>
+			<a class="navbar-item" href="{% url 'new_post' %}">New Post</a>
 			<a class="navbar-item" href="{% url 'profile' user.id %}">Profile</a>
 			<a class="navbar-item" href="{% url 'logout' %}">Log Out</a>
 			{% else %}
