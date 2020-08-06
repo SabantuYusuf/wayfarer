@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1> Post Show Page </h1>
+
+    <!-- <img src="" /> -->
+    <h3>Date: {{ post.date }} </h3>
+    <h3>Author:  {{ user.first_name}} {{ user.last_name}}</h3>
+    <h3>Title: {{ post.title }}</h3>
+
+    <p>Content: {{ post.content }}</p>
+    <br />
+
+
+{% endblock %}
