@@ -8,7 +8,6 @@
 <h5>Location:  {{ profile.city }}</h5>
 <h5>Joined:  {{ profile.user.date_joined}}</h5>
 
-
 <h3>Posts:</h3>
 {% for post in posts %}
 
@@ -20,5 +19,6 @@
     <p>Content: {{ post.content }}</p>
 
 {% endfor %}
+<a href="{% url 'edit_profile' user.id%}">Edit</a>
 
 {% endblock %}
