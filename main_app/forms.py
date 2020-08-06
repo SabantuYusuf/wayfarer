@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, Post
 
 class UserRegisterForm(UserCreationForm):
     first_name = forms.CharField()
@@ -18,9 +18,17 @@ class ProfileRegisterForm(forms.ModelForm):
         fields = ['city']
 
 
+<<<<<<< HEAD
 
 class EditProfile(forms.ModelForm):
  	class Meta:
  		model = User
  		fields = ['first_name', 'last_name']
         
+=======
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('date', 'content', 'title')
+        # add image and author to fields
+>>>>>>> submaster
