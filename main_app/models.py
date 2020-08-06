@@ -16,17 +16,7 @@ class Post(models.Model):
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	city = models.CharField("City", max_length=85, blank=True)
-<<<<<<< HEAD
 
-	
-# Post Model
-class Post(models.Model):
-	title = models.CharField(max_length=100)
-	content = models.TextField(max_length=250)
-	# add city and author
-=======
-	# post = models.ForeignKey(Post, on_delete=models.CASCADE)
->>>>>>> submaster
 
 # City Model
 class City(models.Model):

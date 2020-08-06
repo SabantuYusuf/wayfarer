@@ -18,17 +18,16 @@ class ProfileRegisterForm(forms.ModelForm):
         fields = ['city']
 
 
-<<<<<<< HEAD
 
 class EditProfile(forms.ModelForm):
  	class Meta:
  		model = User
  		fields = ['first_name', 'last_name']
         
-=======
+
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('date', 'content', 'title')
         # add image and author to fields
->>>>>>> submaster
+

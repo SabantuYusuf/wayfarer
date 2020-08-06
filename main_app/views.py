@@ -5,12 +5,9 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as login
-<<<<<<< HEAD
-from .forms import UserRegisterForm, ProfileRegisterForm, EditProfile
+from .forms import UserRegisterForm, ProfileRegisterForm, EditProfile, PostForm
 
-=======
-from .forms import UserRegisterForm, ProfileRegisterForm, PostForm
->>>>>>> submaster
+
 
 
 # Create your views here.
@@ -61,7 +58,6 @@ def signup(request):
 
 
 # Profile
-<<<<<<< HEAD
 # def profile(request, user_id):
 def profile(request):
   # print(f"user_id {user_id}")
@@ -70,15 +66,10 @@ def profile(request):
   user = request.user
   print(user)
   current_user = Profile.objects.get(user=user)
+  posts = Post.objects.filter(user=user)
   print(f"current_user {current_user}")
 #   print(current_user.date_joined)
-=======
-# def profile(request, user_id, #post_id):
-def profile(request, user_id):
-  current_user = Profile.objects.get(user=user_id)
-  posts = Post.objects.filter(user=request.user)
-  print(posts)
->>>>>>> submaster
+
   context = {
     'profile': current_user,
     'posts': posts
@@ -136,19 +127,13 @@ def cities(request):
 def london(request):
   return render(request, 'cities/london.html')
 
-<<<<<<< HEAD
 # Edit Profile
 # def edit_profile(request, user_id):
 def edit_profile(request):
   # current_profile = Profile.objects.get(user=user_id)
   user = request.user
   current_profile = Profile.objects.get(user=user)
-=======
 
-# Edit Profile
-def edit_profile(request, user_id):
-  current_profile = Profile.objects.get(user=user_id)
->>>>>>> submaster
   if request.method == 'POST':
     form = EditProfile(request.POST, instance=user)
     # print(form)
