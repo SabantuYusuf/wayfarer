@@ -5,5 +5,7 @@
 {% csrf_token %}
 <h1> Profile Page </h1>
 {{ profile.user }}
+{{ profile.city }}
+{{ profile.user.date_joined}}
 
 {% endblock %}
