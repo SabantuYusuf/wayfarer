@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1> Post Show Page </h1>
-
-    <!-- <img src="" /> -->
-    <h3>Date: {{ post.date }} </h3>
-    <h3>Author:  {{ user.first_name}} {{ user.last_name}}</h3>
+    <img class="post-image" src="../static/images/stickynote.png"/>
     <h3>Title: {{ post.title }}</h3>
-
+    <h3>Author:  {{ user.first_name}} {{ user.last_name}}</h3>
+    <h3>Date Created: {{ post.date }} </h3>
+    <br />
     <p>Content: {{ post.content }}</p>
     <br />
+    <button class="delete-button">
+        <a href="{% url 'delete_post' post.id %}">Delete</a>
+    </button>
 
 
 {% endblock %}
