@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 {% block content %}
 {% load tz %}
@@ -8,6 +9,7 @@
 <br />
 <h5>Name:  {{ profile.user.first_name}} {{ profile.user.last_name}}</h5>
 <h5>Location:  {{ profile.city }}</h5>
+
 <h5>Joined:  {{ profile.user.date_joined | localtime }}</h5>
 
 <h3>Posts:</h3>
@@ -24,6 +26,6 @@
 
 {% endfor %}
 
-<a href="{% url 'edit_profile' user.id%}">Edit</a>
+<a href="{% url 'edit_profile' %}">Edit</a>
 
 {% endblock %}
