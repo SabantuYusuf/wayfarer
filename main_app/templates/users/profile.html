@@ -3,12 +3,9 @@
 
 {% csrf_token %}
 <h1> Profile Page </h1>
-
-{{ profile.user.first_name }}
-{{ profile.user.last_name }}
-{{ profile.city }}
-{{ profile.user.date_joined }}
-
-
+<br />
+<h5>Name:  {{ profile.user.first_name}} {{ profile.user.last_name}}</h5>
+<h5>Location:  {{ profile.city }}</h5>
+<h5>Joined:  {{ profile.user.date_joined}}</h5>
 
 {% endblock %}

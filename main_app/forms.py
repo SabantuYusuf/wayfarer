@@ -16,8 +16,3 @@ class ProfileRegisterForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['city']
-
-
-
-
-
