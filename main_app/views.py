@@ -141,7 +141,7 @@ def cities(request):
 def london(request):
   return render(request, 'cities/london.html')
 
-<<<<<<< HEAD
+
 def sanfran(request):
   return render(request, 'cities/sanfran.html')
 
@@ -153,7 +153,7 @@ def sydney(request):
 
 
 
-=======
+
 # Edit Profile
 # def edit_profile(request, user_id):
 def edit_profile(request):
@@ -184,6 +184,6 @@ def edit_profile(request):
     form = EditProfile(instance=user)
     p_form = ProfileRegisterForm( instance=current_profile)
   return render(request, 'users/edit.html', {'form': form, 'p_form': p_form})
->>>>>>> submaster
+
 
 
