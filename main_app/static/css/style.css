@@ -20,3 +20,10 @@
     align-items: center;
     justify-content: center;
 }
+
+.slider-item {
+    max-height: 60vh;
+    align-self: center;
+}
+
+
