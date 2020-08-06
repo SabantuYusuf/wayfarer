@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 {% block content %}
 {% load tz %}
@@ -7,9 +8,10 @@
 <img class ="profpic" src="../static/images/TreebeardatIsengard.png"/>
 <h5>Name:  {{ profile.user.first_name}} {{ profile.user.last_name}}</h5>
 <h5>Location:  {{ profile.city }}</h5>
+
 <h5>Joined:  {{ profile.user.date_joined | localtime }}</h5>
 <br />
-<button> <a href="{% url 'edit_profile' user.id%}">Edit Profile</a></button>
+<button> <a href="{% url 'edit_profile' %}">Edit Profile</a></button>
 <br />
 <br />
 <h3>Posts:</h3>
@@ -37,7 +39,6 @@
 {% else %}
     <h4>No Posts</h4>
 {% endif %}
-
 
 
 {% endblock %}
