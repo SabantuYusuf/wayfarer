@@ -1,16 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.dispatch import receiver
-from django.db.models.signals import post_save
 
 # Create your Models here.
 
 # Profile model
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	city = models.CharField(max_length=100, blank=True)	
-
-
+	city = models.CharField("City", max_length=85, blank=True)
+	
 # Post Model
 class Post(models.Model):
 	title = models.CharField(max_length=100)
