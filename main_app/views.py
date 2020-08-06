@@ -59,3 +59,31 @@ def profile(request, user_id):
 # City Route
 def cities(request):
 	return render(request, 'cities.html')
+
+
+
+# Edit Profile
+def edit_profile(request, profile_id):
+  profile = Profile.objects.get(id=profile_id)
+
+  if request.method == 'POST':
+    form = UserRegisterForm(request.POST, instance=profile)
+    if form.is_valid():
+      profile = form.save()
+      return redirect('profile', profile.id)
+
+  else:
+    form = UserRegisterForm(instance=profile)
+    return render(request, 'users/edit.html', {'form': form})
+
+
+    
+
+
+
+
+
+
+
+
+

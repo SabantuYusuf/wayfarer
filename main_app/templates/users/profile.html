@@ -1,15 +1,15 @@
+
 {% extends 'base.html' %}
 {% block content %}
-
-<!-- <h1> {{ user.name }} </h1> -->
 {% csrf_token %}
 <h1> Profile Page </h1>
+<br />
+<h5>Name:  {{ profile.user.first_name}} {{ profile.user.last_name}}</h5>
+<h5>Location:  {{ profile.city }}</h5>
+<h5>Joined:  {{ profile.user.date_joined}}</h5>
 
-{{ profile.user.first_name }}
-{{ profile.user.last_name }}
-{{ profile.city }}
-{{ profile.user.date_joined }}
-
-
-
+{% comment %} EDIT & DELETE ACTIONS {% endcomment %}
+<div>
+	<a href="{% url 'edit_Profile' profile.id %"> Edit Profile</a>
+</div>
 {% endblock %}
