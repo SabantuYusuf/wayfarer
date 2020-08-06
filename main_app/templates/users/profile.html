@@ -5,27 +5,40 @@
 {{ value|localtime }}
 
 {% csrf_token %}
-<h1> Profile Page </h1>
-<br />
+<img class ="profpic" src="../static/images/TreebeardatIsengard.png"/>
 <h5>Name:  {{ profile.user.first_name}} {{ profile.user.last_name}}</h5>
 <h5>Location:  {{ profile.city }}</h5>
 
 <h5>Joined:  {{ profile.user.date_joined | localtime }}</h5>
-
+<br />
+<button> <a href="{% url 'edit_profile' %}">Edit Profile</a></button>
+<br />
+<br />
 <h3>Posts:</h3>
+<br />
 
-
+{% if posts.count %}
     {% for post in posts %}
-    <!-- <img src="" /> -->
-    <h3>Date: {{ post.date }} </h3>
-    <h3>Author:  {{ user.first_name}} {{ user.last_name}}</h3>
-    <h3>Title: {{ post.title }}</h3>
 
-    <p>Content: {{ post.content }}</p>
-    <br />
+    <div class="post-container"> 
+        <div class="posts"> 
+            <!-- <img src="" /> -->
+            <div class="title-link"> 
+                <a href="{% url 'post' post.id %}">
+                    <h3>Title: {{ post.title }}</h3>
+                </a>
+            </div>
+            <h3>Date: {{ post.date }} </h3>
+            <h3>Author:  {{ user.first_name}} {{ user.last_name}}</h3>
+            <p>Content: {{ post.content }}</p>
+            <br />
+        </div>
+    </div>
 
-{% endfor %}
+    {% endfor %}
+{% else %}
+    <h4>No Posts</h4>
+{% endif %}
 
-<a href="{% url 'edit_profile' %}">Edit</a>
 
 {% endblock %}
