@@ -9,6 +9,21 @@
 <br />
 <h5>Name:  {{ profile.user.first_name}} {{ profile.user.last_name}}</h5>
 <h5>Location:  {{ profile.city }}</h5>
+<h5>Joined:  {{ profile.user.date_joined | localtime }}</h5>
+
+<h3>Posts:</h3>
+
+
+    {% for post in posts %}
+    <!-- <img src="" /> -->
+    <h3>Date: {{ post.date }} </h3>
+    <h3>Author:  {{ user.first_name}} {{ user.last_name}}</h3>
+    <h3>Title: {{ post.title }}</h3>
+
+    <p>Content: {{ post.content }}</p>
+    <br />
+
+{% endfor %}
 
 <h5>Joined:  {{ profile.user.date_joined | localtime }}</h5>
 <a href="{% url 'edit_profile' user.id%}">Edit</a>
