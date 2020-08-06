@@ -1,6 +1,7 @@
 
 {% extends 'base.html' %}
 {% block content %}
+
 {% csrf_token %}
 <h1> Profile Page </h1>
 <br />
@@ -8,7 +9,6 @@
 <h5>Location:  {{ profile.city }}</h5>
 <h5>Joined:  {{ profile.user.date_joined}}</h5>
 
-<div>
-	<a href="{% url 'edit_profile' user.id %"> Edit Profile</a>
-</div>
+<a href="{% url 'edit_profile' user.id%}">Edit</a>
+
 {% endblock %}
