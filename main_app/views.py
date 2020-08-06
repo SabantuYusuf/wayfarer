@@ -46,9 +46,13 @@ def signup(request):
   }
   return render(request, 'registration/signup.html', context)
 
+
 # Profile
 def profile(request, user_id):
+  print(f"user_id {user_id}")
+  # current_user = Profile.objects.all().filter(username=request.user)
   current_user = Profile.objects.get(user=user_id)
+  print(f"current_user {current_user}")
 #   print(current_user.date_joined)
   context = {
     'profile': current_user,
@@ -64,17 +68,22 @@ def cities(request):
 def london(request):
   return render(request, 'cities/london.html')
 
+# Edit Profile
 def edit_profile(request, user_id):
   current_profile = Profile.objects.get(user=user_id)
   if request.method == 'POST':
     form = UserRegisterForm(request.POST)
+    # print(form)
     p_form = ProfileRegisterForm(request.POST, instance=current_profile)
+    # print(p_form)
     if form.is_valid() and p_form.is_valid():
       user = form.save()
+      print(f"USER {user}")
       profile = p_form.save(commit=False)
       profile.user = user
+      print(f"PROFILE.USER {profile.user}")
       profile.save()
-      return redirect('profile', user.id)
+      return redirect('profile', profile.user.id)
   else:
     form = UserRegisterForm(request.POST)
     p_form = ProfileRegisterForm(request.POST, instance=current_profile)
