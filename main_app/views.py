@@ -4,7 +4,9 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as login
-
+from .forms import UserForm, ProfileForm
+from django.contrib.auth.models import User
+from datetime import datetime
 
 # Create your views here.
 
@@ -23,24 +25,26 @@ def home(request):
 
 # User Routes
 def signup(request):
-  error_message = ''
-  if request.method == 'POST':
-    form = UserCreationForm(request.POST)
-    if form.is_valid():
-      user = form.save()
-      login(request, user)
-      return redirect('profile', user.id)
-    else:
-      error_message = 'Invalid sign up - try again'
-  form = UserCreationForm()
-  context = {'form': form, 'error_message': error_message}
-  return render(request, 'registration/signup.html', context)
+	error_message = ''
+	if request.method == 'POST':
+		form = UserForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			login(request, user)
+			return redirect('profile', user.id)
+		else:
+			error_message = 'Invalid sign up - try again'
+	form = UserForm(request.POST)
+	context = {'form': form, 'error_message': error_message}
+	return render(request, 'registration/signup.html', context)
+
 
 # Profile
 def profile(request, user_id):
-  current_user = Profile.objects.get(user=user_id)
+  current_user = User.objects.get(id=user_id)
+#   print(current_user.date_joined)
   context = {
-    'profile': current_user
+    'profile': current_user,
   }
   return render(request, 'users/profile.html', context)
 
