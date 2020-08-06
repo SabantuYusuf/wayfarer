@@ -63,6 +63,7 @@ def cities(request):
 def london(request):
   return render(request, 'cities/london.html')
 
+# edit route
 def edit_profile(request, user_id):
   current_profile = Profile.objects.get(user=user_id)
   if request.method == 'POST':
