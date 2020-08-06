@@ -42,6 +42,3 @@ class City(models.Model):
 	name = models.CharField(max_length=100)
 	# image = models.ImageField() 
 	# install pillow
-
-
-
