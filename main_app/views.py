@@ -30,11 +30,9 @@ def signup(request):
   if request.method == 'POST':
     if form.is_valid() and p_reg_form.is_valid():
       user = form.save()
-
       profile = p_reg_form.save(commit=False)
       profile.user = user
       profile.save()
-
       login(request, user)
       return redirect('profile', user.id)
     else:
@@ -50,7 +48,7 @@ def signup(request):
 
 # Profile
 def profile(request, user_id):
-  current_user = User.objects.get(id=user_id)
+  current_user = Profile.objects.get(user=user_id)
 #   print(current_user.date_joined)
   context = {
     'profile': current_user,

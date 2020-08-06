@@ -5,10 +5,10 @@
 {% csrf_token %}
 <h1> Profile Page </h1>
 
-{{ profile.first_name }}
-{{ profile.last_name }}
-{{ user.city }}
-{{ profile.date_joined }}
+{{ profile.user.first_name }}
+{{ profile.user.last_name }}
+{{ profile.city }}
+{{ profile.user.date_joined }}
 
 
 
