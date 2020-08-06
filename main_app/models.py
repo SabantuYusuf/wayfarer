@@ -10,9 +10,12 @@ class Profile(models.Model):
 	
 # Post Model
 class Post(models.Model):
-	title = models.CharField(max_length=100)
-	content = models.TextField(max_length=250)
-	# add city and author
+    # image = models.ImageField()
+    content = models.CharField("Content", max_length=250, blank=True)
+    date = models.DateField()
+    title = models.CharField("Title", max_length=100, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+# add actual city and author
 
 # City Model
 class City(models.Model):

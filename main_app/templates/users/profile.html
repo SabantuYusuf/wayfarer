@@ -8,4 +8,17 @@
 <h5>Location:  {{ profile.city }}</h5>
 <h5>Joined:  {{ profile.user.date_joined}}</h5>
 
+
+<h3>Posts:</h3>
+{% for post in posts %}
+
+    <img src="" />
+    <h3>Date: </h3>
+    <a href="{% url 'post_show' post.id %}"> <h3>Title: {{ post.title }}</h3></a>
+    <h3>Author: {{ post.author }}</h3>
+
+    <p>Content: {{ post.content }}</p>
+
+{% endfor %}
+
 {% endblock %}
