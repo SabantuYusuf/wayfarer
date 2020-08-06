@@ -56,10 +56,11 @@ def signup(request):
 # def profile(request, user_id, #post_id):
 def profile(request, user_id):
   current_user = Profile.objects.get(user=user_id)
-  # post = Post.objects.get(post_id=post_id)
+  posts = Post.objects.filter(user=request.user)
+  print(posts)
   context = {
-    'profile': current_user
-    # 'post': post
+    'profile': current_user,
+    'posts': posts
   }
   return render(request, 'users/profile.html', context)
 
@@ -76,18 +77,35 @@ def new_post(request):
       new_post.save()
 
       # return redirect('profile', new_post.id)
-      return redirect('post_show', new_post.id)
+      return redirect('post', new_post.id)
   else:
     post_form = PostForm()
-    return render(request, 'posts/new.html', {'post_form': post_form})
+    return render(request, 'posts2/new.html', {'post_form': post_form})
 
 # Post Show Page
 def post(request, post_id):
   post = Post.objects.get(id=post_id)
   context = {
     'post': post
-    }
-  return render(request, 'posts/postsshow.html', context)
+  }
+  print(post)
+  return render(request, 'posts2/postsshow.html', context)
+
+# Post Index Page (Delete Later - Just for Testing)
+# def post(request):
+#   posts = Post.objects.filter(user=request.user)
+#   context = {
+#     'posts': posts
+#   }
+#   return render(request, 'users/profile.html', context)
+
+# Add Posts Route
+# def assoc_posts(request, user_id, post_id):
+#   user = Profile.objects.get(user=user_id)
+#   post = Post.objects.get(id=post_id)
+#   user.posts.add(post)
+#   return redirect('profile', user_id)
+
 
 # City Routes
 def cities(request):
@@ -96,6 +114,8 @@ def cities(request):
 def london(request):
   return render(request, 'cities/london.html')
 
+
+# Edit Profile
 def edit_profile(request, user_id):
   current_profile = Profile.objects.get(user=user_id)
   if request.method == 'POST':
