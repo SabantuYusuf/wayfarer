@@ -28,9 +28,6 @@
 		</div>
 		<div class="navbar-end">
 			{% if user.is_authenticated %}
-			{% comment %}
-			<a class="navbar-item" href="{% url 'profile' user.id %}">Profile</a>
-			{% endcomment%}
 
 			<a class="navbar-item" href="{% url 'profile' %}">Profile</a>
 
