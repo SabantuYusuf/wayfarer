@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
 from .models import Profile, Post
-from django_fields import DefaultStaticImageField
+
 
 class UserRegisterForm(UserCreationForm):
     prof_img = forms.ImageField()

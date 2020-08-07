@@ -175,7 +175,6 @@ def sydney(request):
   return render(request, 'cities/sydney.html')
 
 
-<<<<<<< HEAD
 
 
 # Edit Profile
