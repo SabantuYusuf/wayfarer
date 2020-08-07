@@ -13,3 +13,7 @@ def add_class(field, classname):
     else:
         classes = classname
     return field.as_widget(attrs={'class': classes})
+
+
+# Got help from this article:
+# https://ethanshearer.com/view-post/3/070519/sass-with-django-part2-bulma
