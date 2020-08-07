@@ -6,6 +6,7 @@ urlpatterns =[
 	# User Routes---
 	path('accounts/signup/', views.signup, name='signup'),
 
+
 	# path('users/<int:user_id>', views.profile, name='profile'),
 	path('users/', views.profile, name='profile'),
 
@@ -28,11 +29,5 @@ urlpatterns =[
 	path('cities/seattle', views.seattle, name='seattle'),
 	path('cities/sydney', views.sydney, name='sydney'),
 
-	# Add Post
-  	# path('users/<int:user_id>/assoc_posts/<int:new_post_id>', views.assoc_posts, name='assoc_posts'),
-
-	# City Routes
-	path('cities/', views.cities, name='cities'),
-	path('cities/london/', views.london, name='london'),
 
 ]
