@@ -31,6 +31,10 @@ def home(request):
 
 	return render(request, 'home.html')
 
+# About
+def about(request):
+  return HttpResponse('about')
+
 # User Routes
 
 # Sign Up
@@ -79,21 +83,36 @@ def profile(request):
   return render(request, 'users/profile.html', context)
 
 # Edit Profile
-def edit_profile(request, user_id):
-  current_profile = Profile.objects.get(user=user_id)
+# def edit_profile(request, user_id):
+def edit_profile(request):
+  # current_profile = Profile.objects.get(user=user_id)
+  user = request.user
+  current_profile = Profile.objects.get(user=user)
+
   if request.method == 'POST':
-    form = UserRegisterForm(request.POST)
+    form = EditProfile(request.POST, instance=user)
+    # print(form)
     p_form = ProfileRegisterForm(request.POST, instance=current_profile)
+    # print(p_form)
     if form.is_valid() and p_form.is_valid():
       user = form.save()
-      profile = p_form.save(commit=False)
-      profile.user = user
-      profile.save()
-      return redirect('profile', user.id)
+      print(f"USER {user}")
+      profile = p_form.save()
+
+      # profile.user = user
+      
+      # print(f"PROFILE.USER {profile.user}")
+
+      # profile.save()
+      # user.id = current_profile.id
+      # return redirect('profile', profile.user.id)
+      login(request, user)
+      return redirect('profile')
   else:
-    form = UserRegisterForm(request.POST)
-    p_form = ProfileRegisterForm(request.POST, instance=current_profile)
+    form = EditProfile(instance=user)
+    p_form = ProfileRegisterForm( instance=current_profile)
   return render(request, 'users/edit.html', {'form': form, 'p_form': p_form})
+
 
 # Post Routes
 
@@ -127,7 +146,7 @@ def post(request, post_id):
 # Delete Post
 def delete_post(request, post_id):
   Post.objects.get(id=post_id).delete()
-  return redirect('home')
+  return redirect('profile')
   #works, but edit code to redirect to profile
 
 
@@ -143,7 +162,7 @@ def london(request):
 
 
 def sanfran(request):
-  return render(request, 'cities/sanfran.html')
+      return render(request, 'cities/sanfran.html')
 
 def seattle(request):
   return render(request, 'cities/seattle.html')
@@ -184,6 +203,5 @@ def edit_profile(request):
     form = EditProfile(instance=user)
     p_form = ProfileRegisterForm( instance=current_profile)
   return render(request, 'users/edit.html', {'form': form, 'p_form': p_form})
-
 
 
