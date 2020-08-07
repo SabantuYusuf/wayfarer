@@ -5,26 +5,10 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as login
-from .forms import UserRegisterForm, ProfileRegisterForm, EditProfile, PostForm
-
-
+from .forms import UserRegisterForm, ProfileRegisterForm, EditProfile, PostForm, EditProfileCity
 
 
 # Create your views here.
-
-# Temp data
-# class Post:
-#   def __init__(self, title, author, content, city):
-#     self.title = title
-#     self.author = author
-#     self.content = content
-#     self.city = city
-
-# posts = [
-#   Post('Big Ben got Booty', 'Some Guy', 'Dang BB is huge and keeps correct time? You go, Ben Coco!', 'London'),
-#   Post('Tour Busses - Watch Your Head!', 'Guy #2', 'Hit my head going under a tree. 2/10', 'London'),
-#   Post('Phone Booths Still Exist?', 'Some Girl!', 'Did not know these still existed. Went in one to make a call and realized it was disconnected', 'London'),
-# ]
 
 # Home
 def home(request):
@@ -92,28 +76,26 @@ def edit_profile(request):
   current_profile = Profile.objects.get(user=user)
 
   if request.method == 'POST':
-    form = EditProfile(request.POST, instance=user)
-    # print(form)
-    p_form = ProfileRegisterForm(request.POST, instance=current_profile)
-    # print(p_form)
+    # print("This is the thing ", request.POST['prof_img'])
+    form = EditProfile(request.POST, request.FILES, instance=user)
+    p_form = ProfileRegisterForm(request.POST, request.FILES, instance=current_profile)
+    
     if form.is_valid() and p_form.is_valid():
       user = form.save()
       print(f"USER {user}")
-      profile = p_form.save()
-
-      # profile.user = user
-      
-      # print(f"PROFILE.USER {profile.user}")
-
-      # profile.save()
-      # user.id = current_profile.id
-      # return redirect('profile', profile.user.id)
+      profile = p_form.save(commit=False)
+      profile.save()
+   
       login(request, user)
       return redirect('profile')
   else:
     form = EditProfile(instance=user)
     p_form = ProfileRegisterForm( instance=current_profile)
-  return render(request, 'users/edit.html', {'form': form, 'p_form': p_form})
+  context = {
+    'form': form, 
+    'p_form': p_form,
+  }
+  return render(request, 'users/edit.html', context)
 
 
 # Post Routes------
@@ -210,6 +192,7 @@ def edit_profile(request):
 
 
 
+
 # def sanfran_new(request):
 #     if request.method == 'POST':
 #       post= PostForm(request.POST, request.FILES)
@@ -230,4 +213,6 @@ def edit_profile(request):
 
 
 # Credit = image upload = https://www.geeksforgeeks.org/python-uploading-images-in-django/
+# downloaded paperclip and pillow
+
 

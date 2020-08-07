@@ -22,7 +22,9 @@ urlpatterns =[
 	path('users/edit/', views.edit_profile, name='edit_profile'),
 
 
+
 	# Post Routes--
+
 
 	# Show
 	path('posts/<int:post_id>', views.post, name='post'),
