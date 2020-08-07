@@ -68,21 +68,21 @@ def edit_profile(request):
   current_profile = Profile.objects.get(user=user)
   if request.method == 'POST':
     # print("This is the thing ", request.POST['prof_img'])
-    form = EditProfile(request.POST, request.FILES, instance=user)
+    e_form = EditProfile(request.POST, request.FILES, instance=user)
     p_form = ProfileRegisterForm(request.POST, request.FILES, instance=current_profile)
     
-    if form.is_valid() and p_form.is_valid():
-      user = form.save()
+    if e_form.is_valid() and p_form.is_valid():
+      user = e_form.save()
       print(f"USER {user}")
       profile = p_form.save(commit=False)
       profile.save() 
       login(request, user)
       return redirect('profile')
   else:
-    form = EditProfile(instance=user)
+    e_form = EditProfile(instance=user)
     p_form = ProfileRegisterForm( instance=current_profile)
   context = {
-    'form': form, 
+    'e_form': e_form, 
     'p_form': p_form,
   }
   return render(request, 'users/edit.html', context)
@@ -103,7 +103,6 @@ def new_post(request):
   else:
     post_form = PostForm()
     return render(request, 'posts2/new.html', {'post_form': post_form})
-    # , {'new_post': Posts}
 
 # Post Show Page
 def post(request, post_id):
@@ -172,36 +171,7 @@ def sydney(request):
   }
   return render(request, 'cities/sydney.html', context)
 
-# Edit Profile
-# def edit_profile(request, user_id):
-def edit_profile(request):
-  # current_profile = Profile.objects.get(user=user_id)
-  user = request.user
-  current_profile = Profile.objects.get(user=user)
 
-  if request.method == 'POST':
-    form = EditProfile(request.POST, instance=user)
-    # print(form)
-    p_form = ProfileRegisterForm(request.POST, instance=current_profile)
-    # print(p_form)
-    if form.is_valid() and p_form.is_valid():
-      user = form.save()
-      print(f"USER {user}")
-      profile = p_form.save()
-
-      # profile.user = user
-      
-      # print(f"PROFILE.USER {profile.user}")
-
-      # profile.save()
-      # user.id = current_profile.id
-      # return redirect('profile', profile.user.id)
-      login(request, user)
-      return redirect('profile')
-  else:
-    form = EditProfile(instance=user)
-    p_form = ProfileRegisterForm( instance=current_profile)
-  return render(request, 'users/edit.html', {'form': form, 'p_form': p_form})
 
 
 
