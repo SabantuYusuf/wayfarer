@@ -2,17 +2,27 @@
 {% block content %}
 {% load templatetags %}
 
-<h1> Log In</h1>
-
-<form action="{% url 'login' %}" method="POST">
-    {% csrf_token %}
-
-    {% for field in form %}
-      <label for="">{{ field.label }}</label>
-      {{ field|add_class:"input" }}
-      {% endfor %}
-
-    <button type="submit">Login</button>
-</form>
+<div class="section">
+  <div class="containter">
+    <h1 class="title has-text-centered"> Log In </h1>
+    <div class="columns">
+      <div class="column is-4"></div>
+      <div class="column is-4">
+        <form action="{% url 'login' %}" method="POST">
+              {% csrf_token %}
+        
+              {% for field in form %}
+              <label for="">{{ field.label }}</label>
+              {{ field|add_class:"input" }}
+              {% endfor %}
+              <div class="buttons has-addons is-centered">
+                <button type="submit" class="button mt-4">Login</button>
+              </div>
+          </form> 
+      </div>
+      <div class="column is-4"></div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

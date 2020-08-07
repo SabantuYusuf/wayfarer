@@ -10,6 +10,14 @@ font-family: 'Source Sans Pro', sans-serif; */
     --source: 'Source Sans Pro', sans-serif;
 }
 
+main {
+    min-height: 65vh;
+}
+
+.footer {
+    margin-bottom: 0;
+}
+
 /* Potential Colors? */
 /* #9ED7F4 NO
 #E5F4FC BACK
