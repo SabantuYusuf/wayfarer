@@ -7,8 +7,8 @@ from PIL import Image
 # CITY OPTIONS
 CITIES = (
     ('1', 'San Francisco'),
-    ('3', 'London'),
     ('2', 'Seattle'),
+    ('3', 'London'),
     ('4', 'Sydney'),
 )
 

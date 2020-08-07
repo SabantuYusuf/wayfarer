@@ -68,21 +68,20 @@ def edit_profile(request):
   current_profile = Profile.objects.get(user=user)
   if request.method == 'POST':
     # print("This is the thing ", request.POST['prof_img'])
-    form = EditProfile(request.POST, request.FILES, instance=user)
+    e_form = EditProfile(request.POST, request.FILES, instance=user)
     p_form = ProfileRegisterForm(request.POST, request.FILES, instance=current_profile)
-    
-    if form.is_valid() and p_form.is_valid():
-      user = form.save()
+    if e_form.is_valid() and p_form.is_valid():
+      user = e_form.save()
       print(f"USER {user}")
       profile = p_form.save(commit=False)
-      profile.save() 
+      profile.save()
       login(request, user)
       return redirect('profile')
   else:
-    form = EditProfile(instance=user)
+    e_form = EditProfile(instance=user)
     p_form = ProfileRegisterForm( instance=current_profile)
   context = {
-    'form': form, 
+    'e_form': e_form,
     'p_form': p_form,
   }
   return render(request, 'users/edit.html', context)
@@ -202,7 +201,6 @@ def edit_profile(request):
     form = EditProfile(instance=user)
     p_form = ProfileRegisterForm( instance=current_profile)
   return render(request, 'users/edit.html', {'form': form, 'p_form': p_form})
-
 
 
 
