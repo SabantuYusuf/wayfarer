@@ -64,6 +64,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries' : {
+            'templatetags' : 'main_app.templatetags.form_tags'
+            }
         },
     },
 ]
@@ -122,5 +125,3 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'profile'
 LOGOUT_REDIRECT_URL = 'home'
-
-
