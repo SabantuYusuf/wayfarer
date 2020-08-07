@@ -115,7 +115,7 @@ def edit_profile(request):
 # Create (New) Post Route
 def new_post(request):
   if request.method == 'POST':
-    post_form = PostForm(request.POST)
+    post_form = PostForm(request.POST, request.FILES)
     if post_form.is_valid():
     # image = request.POST['image']
       new_post = post_form.save(commit=False)
@@ -128,6 +128,7 @@ def new_post(request):
   else:
     post_form = PostForm()
     return render(request, 'posts2/new.html', {'post_form': post_form})
+    # , {'new_post': Posts}
 
 # Post Show Page
 def post(request, post_id):
@@ -136,7 +137,9 @@ def post(request, post_id):
     'post': post
   }
   print(post)
-  return render(request, 'posts2/postsshow.html', context)
+  if request.method == 'GET':
+    Posts = Post.objects.all()
+    return render(request, 'posts2/postsshow.html', context)
 
 
 # Delete Post
@@ -151,7 +154,6 @@ def delete_post(request, post_id):
 
 def cities(request):
 	return render(request, 'cities/citydefault.html')
-
 
 def london(request):
   return render(request, 'cities/london.html')

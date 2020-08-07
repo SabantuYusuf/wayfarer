@@ -18,7 +18,6 @@ class ProfileRegisterForm(forms.ModelForm):
         fields = ['city']
 
 
-
 class EditProfile(forms.ModelForm):
  	class Meta:
  		model = User
@@ -28,6 +27,7 @@ class EditProfile(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('date', 'content', 'title')
+        fields = ('post_img', 'title', 'content' )
+        # fields = ('date', 'content', 'title', 'post_img')
         # add image and author to fields
 
