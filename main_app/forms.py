@@ -20,10 +20,9 @@ class ProfileRegisterForm(forms.ModelForm):
 
 
 class EditProfile(forms.ModelForm):
-
     class Meta:
- 	    model = User
- 	    fields = ['first_name', 'last_name']
+        model = User
+        fields = ['first_name', 'last_name']
 
 class EditProfileCity(forms.ModelForm):
 
@@ -35,7 +34,6 @@ class EditProfileCity(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('post_img', 'title', 'content' )
-        # fields = ('date', 'content', 'title', 'post_img')
+        fields = ['post_img', 'content', 'title', 'city_options']
         # add image and author to fields
 

@@ -4,7 +4,20 @@ from PIL import Image
 
 
 
+# CITY OPTIONS
+CITIES = (
+    ('1', 'San Francisco'),
+    ('3', 'London'),
+    ('2', 'Seattle'),
+    ('4', 'Sydney'),
+)
+
 # Create your Models here.
+# City Model
+class City(models.Model):
+	name = models.CharField(max_length=100)
+	# image = models.ImageField() 
+	# install pillow
 
 # Post Model
 class Post(models.Model):
@@ -14,7 +27,13 @@ class Post(models.Model):
     date = models.DateField(auto_now_add=True)
     title = models.CharField("Title", max_length=100, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-# add actual city
+    city_options = models.CharField(
+        'City',
+        max_length=2,
+        choices=CITIES,
+        default=CITIES[0][0])
+    city = models.ForeignKey(City, on_delete=models.PROTECT)
+    
 
 # Profile model
 class Profile(models.Model):
@@ -22,7 +41,3 @@ class Profile(models.Model):
     city = models.CharField("Current City", max_length=85, blank=True)
     prof_img = models.ImageField("Profile Image", null=True, blank=True, upload_to='images/', default='defaultpic.png')
 
-# City Model
-class City(models.Model):
-	name = models.CharField(max_length=100)
-	# image = models.ImageField() 

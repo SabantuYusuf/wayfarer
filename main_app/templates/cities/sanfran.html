@@ -9,7 +9,7 @@
                 <img src="{% static 'images/london1.jpg' %}">
               </figure>
             <div class="column is-8 has-text-centered is-vcentered">
-                <a href="{% url 'london' %}">London</a>
+                <a href="{% url 'london' %}" class="is-size-3 city">London</a>
             </div>
         </div>
         <div class="columns active">
@@ -17,15 +17,7 @@
                 <img src="{% static 'images/sanfran.jpg' %}">
               </figure>
             <div class="column is-8 has-text-centered is-vcentered">
-                <a href="{% url 'sanfran' %}">San Francisco</a>
-
-                
-                <a href="{% url 'new_post' %}">
-                  <button>New Post</button>
-                </a>
-
-
-
+                <a href="{% url 'sanfran' %}" class="is-size-3 city">San Francisco</a>
             </div>
 
 
@@ -35,7 +27,7 @@
                 <img src="{% static 'images/seattle.jpg' %}">
               </figure>
             <div class="column is-8 has-text-centered is-vcentered">
-                <a href="{% url 'seattle' %}">Seattle</a>
+                <a href="{% url 'seattle' %}" class="is-size-3 city">Seattle</a>
             </div>
         </div>
         <div class="columns">
@@ -43,27 +35,15 @@
                 <img src="{% static 'images/sydney.jpg' %}">
               </figure>
             <div class="column is-8 has-text-centered is-vcentered">
-                <a href="{% url 'sydney' %}">Sydney</a>
+                <a href="{% url 'sydney' %}" class="is-size-3 city">Sydney</a>
             </div>
         </div>
-        <!-- <ul class="has-text-centered">
-              <li>
-                  <a href="#">London</a>
-              </li>
-              <li>
-                  <a href="#">San Francisco</a>
-              </li>
-              <li>
-                  <a href="#">Seattle</a>
-              </li>
-              <li>
-                  <a href="#">Sydney</a>
-              </li>
-          </ul> -->
   </div>
   <div class="column is-7">
       <img src="{% static 'images/sanfran.jpg' %}" alt="">
       <!-- POST CONTENT -->
+    {% if posts.count %}
+    {% for post in posts %}  
     <article class="media">
         <figure class="media-left">
           <p class="image is-64x64">
@@ -71,12 +51,11 @@
           </p>
         </figure>
         <div class="media-content">
-          <div class="content">
-            <p>
-              <strong>User</strong> <small>Date</small>
-              <br>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-            </p>
+          <div class="content"> 
+              <strong><a href="{% url 'post' post.id %}">{{ post.title }}</a></strong> <small>Date: {{ post.date }}</small>
+              <p>
+                By: {{ post.user.first_name}} {{ post.user.last_name}}
+                <br/>{{ post.content }}</p>
           </div>
           <nav class="level is-mobile">
             <div class="level-left">
@@ -96,6 +75,10 @@
           <button class="delete"></button>
         </div>
       </article>
+      {% endfor %}
+      {% else %}
+      <h2>No Posts</h2>
+      {% endif %}
   </div>
 </div>
 
