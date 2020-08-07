@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as login
-from .forms import UserRegisterForm, ProfileRegisterForm, EditProfile, PostForm, EditProfileCity
+from .forms import UserRegisterForm, ProfileRegisterForm, EditProfile, PostForm, EditProfileCity, EditPost
 
 
 # Create your views here.
@@ -39,7 +39,7 @@ def signup(request):
       prof_form = UserRegisterForm()
       p_reg_form = ProfileRegisterForm()
   context = {
-    'prof_form': prof_form, 
+    'form': prof_form, 
     'p_reg_form': p_reg_form,
     'error_message': error_message,
   }
@@ -197,5 +197,24 @@ def sydney(request):
 
 # Credit = image upload = https://www.geeksforgeeks.org/python-uploading-images-in-django/
 # downloaded paperclip and pillow
+
+
+
+def edit_post(request, post_id):
+  current_post = Post.objects.get(id=post_id)
+
+  if request.method == 'POST':
+    form = EditPost(request.POST, request.FILES, instance=current_post)
+    if form.is_valid():
+      current_post = form.save()
+      return redirect('cities')
+  else:
+    form = EditPost(instance=current_post)
+    return render(request, 'posts2/edit.html', {'form': form})
+
+
+
+
+
 
 
