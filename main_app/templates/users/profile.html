@@ -6,7 +6,7 @@
 
 
 {% csrf_token %}
-<!-- <img class = "profpic" src="../static/images/defaultpic.png"/> -->
+
 {% if profile.prof_img %}
     <img class = "profpic" src="{{ profile.prof_img.url }}"/>
 {% else %}
@@ -46,8 +46,5 @@
 {% else %}
     <h4>No Posts</h4>
 {% endif %}
-
-<h5>Joined:  {{ profile.user.date_joined | localtime }}</h5>
-<a href="{% url 'edit_profile' %}">Edit</a>
 
 {% endblock %}
