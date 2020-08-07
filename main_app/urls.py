@@ -6,11 +6,8 @@ urlpatterns =[
 
 	# User Routes---
 
-<<<<<<< HEAD
-=======
 	# Sign Up
 	path('accounts/signup/', views.signup, name='signup'),
->>>>>>> 39c0e53ac810d87fc9d749080fe12cb787227db5
 
 	# path('users/<int:user_id>', views.profile, name='profile'),
 
@@ -21,12 +18,7 @@ urlpatterns =[
 
 	# Edit
 	path('users/edit/', views.edit_profile, name='edit_profile'),
-<<<<<<< HEAD
-	# Post Routes
-=======
 
-	# Post Routes--
->>>>>>> 39c0e53ac810d87fc9d749080fe12cb787227db5
 
 	# Show
 	path('posts/<int:post_id>', views.post, name='post'),
