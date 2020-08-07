@@ -9,7 +9,7 @@
                 <img src="{% static 'images/london1.jpg' %}">
               </figure>
             <div class="column is-8 has-text-centered is-vcentered">
-                <a href="{% url 'london' %}">London</a>
+                <a href="{% url 'london' %}" class="is-size-3 city">London</a>
             </div>
         </div>
         <div class="columns">
@@ -17,7 +17,7 @@
                 <img src="{% static 'images/sanfran.jpg' %}">
               </figure>
             <div class="column is-8 has-text-centered is-vcentered">
-                <a href="{% url 'sanfran' %}">San Francisco</a>
+                <a href="{% url 'sanfran' %}" class="is-size-3 city">San Francisco</a>
             </div>
         </div>
         <div class="columns">
@@ -25,7 +25,7 @@
                 <img src="{% static 'images/seattle.jpg' %}">
               </figure>
             <div class="column is-8 has-text-centered is-vcentered">
-                <a href="{% url 'seattle' %}">Seattle</a>
+                <a href="{% url 'seattle' %}" class="is-size-3 city">Seattle</a>
             </div>
         </div>
         <div class="columns">
@@ -33,48 +33,14 @@
                 <img src="{% static 'images/sydney.jpg' %}">
               </figure>
             <div class="column is-8 has-text-centered is-vcentered">
-                <a href="{% url 'sydney' %}">Sydney</a>
+                <a href="{% url 'sydney' %}" class="is-size-3 city">Sydney</a>
             </div>
         </div>
   </div>
-  
+
   <div class="column is-7">
-      <img src="{% static 'images/cities.jpeg' %}" alt="">
-      <!-- POST CONTENT -->
-    <article class="media">
-        <figure class="media-left">
-          <p class="image is-64x64">
-            <img src="https://bulma.io/images/placeholders/128x128.png">
-          </p>
-        </figure>
-        <div class="media-content">
-          <div class="content">
-            <p>
-              <strong>User</strong> <small>Date</small>
-              <br>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-            </p>
-          </div>
-          <nav class="level is-mobile">
-            <div class="level-left">
-              <a class="level-item">
-                <span class="icon is-small"><i class="fas fa-reply"></i></span>
-              </a>
-              <a class="level-item">
-                <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-              </a>
-              <a class="level-item">
-                <span class="icon is-small"><i class="fas fa-heart"></i></span>
-              </a>
-            </div>
-          </nav>
-        </div>
-        <div class="media-right">
-          <button class="delete"></button>
-        </div>
-      </article>
+      <img src="{% static 'images/cities.jpeg' %}" alt="">   
   </div>
-</div>
 
 
 {% endblock %}

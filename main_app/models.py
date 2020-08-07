@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 
 # CITY OPTIONS
 CITIES = (
-    ('SF', 'San Francisco'),
-    ('L', 'London'),
-    ('S', 'Seattle'),
-    ('SY', 'Sydney'),
+    ('1', 'San Francisco'),
+    ('3', 'London'),
+    ('2', 'Seattle'),
+    ('4', 'Sydney'),
 )
 
 # Create your Models here.
@@ -20,7 +20,7 @@ class City(models.Model):
 class Post(models.Model):
     # image = models.ImageField()
     content = models.CharField("Content", max_length=250, blank=True)
-    date = models.DateField()
+    date = models.DateField(auto_now_add=True)
     title = models.CharField("Title", max_length=100, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     city_options = models.CharField(

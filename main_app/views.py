@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Profile, Post
+from .models import Profile, Post, City
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
@@ -8,30 +8,11 @@ from django.contrib.auth import login as login
 from .forms import UserRegisterForm, ProfileRegisterForm, EditProfile, PostForm
 
 
-
-
-# Create your views here.
-
-# Temp data
-# class Post:
-#   def __init__(self, title, author, content, city):
-#     self.title = title
-#     self.author = author
-#     self.content = content
-#     self.city = city
-
-# posts = [
-#   Post('Big Ben got Booty', 'Some Guy', 'Dang BB is huge and keeps correct time? You go, Ben Coco!', 'London'),
-#   Post('Tour Busses - Watch Your Head!', 'Guy #2', 'Hit my head going under a tree. 2/10', 'London'),
-#   Post('Phone Booths Still Exist?', 'Some Girl!', 'Did not know these still existed. Went in one to make a call and realized it was disconnected', 'London'),
-# ]
-
-# Home
+# HOME
 def home(request):
-
 	return render(request, 'home.html')
 
-# User Routes
+# USER ROUTES
 
 # Sign Up
 def signup(request):
@@ -45,7 +26,6 @@ def signup(request):
       profile.user = user
       profile.save()
       login(request, user)
-      # return redirect('profile', user.id)
       return redirect('profile')
     else:
       error_message = 'Invalid sign up - try again'
@@ -60,18 +40,12 @@ def signup(request):
 
 
 # Profile
-# def profile(request, user_id):
 def profile(request):
-  # print(f"user_id {user_id}")
-  # current_user = Profile.objects.all().filter(username=request.user)
-  # current_user = Profile.objects.get(user=user_id)
   user = request.user
   print(user)
   current_user = Profile.objects.get(user=user)
   posts = Post.objects.filter(user=user)
   print(f"current_user {current_user}")
-#   print(current_user.date_joined)
-
   context = {
     'profile': current_user,
     'posts': posts
@@ -79,29 +53,18 @@ def profile(request):
   return render(request, 'users/profile.html', context)
 
 # Edit Profile
-# def edit_profile(request, user_id):
+@login_required
 def edit_profile(request):
-  # current_profile = Profile.objects.get(user=user_id)
   user = request.user
   current_profile = Profile.objects.get(user=user)
 
   if request.method == 'POST':
     form = EditProfile(request.POST, instance=user)
-    # print(form)
     p_form = ProfileRegisterForm(request.POST, instance=current_profile)
-    # print(p_form)
     if form.is_valid() and p_form.is_valid():
       user = form.save()
       print(f"USER {user}")
       profile = p_form.save()
-
-      # profile.user = user
-      
-      # print(f"PROFILE.USER {profile.user}")
-
-      # profile.save()
-      # user.id = current_profile.id
-      # return redirect('profile', profile.user.id)
       login(request, user)
       return redirect('profile')
   else:
@@ -110,20 +73,18 @@ def edit_profile(request):
   return render(request, 'users/edit.html', {'form': form, 'p_form': p_form})
 
 
-# Post Routes
+# POST ROUTES
 
 # Create (New) Post Route
+@login_required
 def new_post(request):
   if request.method == 'POST':
     post_form = PostForm(request.POST)
     if post_form.is_valid():
-    # image = request.POST['image']
       new_post = post_form.save(commit=False)
-      # user = Profile.ojects.get(user_id=user_id)
       new_post.user = request.user
+      new_post.city_id = request.POST['city_options']
       new_post.save()
-
-      # return redirect('profile', new_post.id)
       return redirect('post', new_post.id)
   else:
     post_form = PostForm()
@@ -138,32 +99,64 @@ def post(request, post_id):
   print(post)
   return render(request, 'posts2/postsshow.html', context)
 
-
 # Delete Post
+@login_required
 def delete_post(request, post_id):
-  Post.objects.get(id=post_id).delete()
-  return redirect('profile')
-  #works, but edit code to redirect to profile
+  error_message = ''
+  post = Post.objects.get(id=post_id)
+  if request.user == post.user:
+    Post.objects.filter(id=post_id).delete()
+    return redirect('profile')
+  else:
+    error_message = 'You can only delete your own post'
+    context = {
+      'error': error_message
+    }  
+    return render(request, 'cities/citydefault.html', context)
+# CAN WE ADD A POP UP INSTEAD OF REDIRECTING? (NEED TO ADD ERROR MESSAGE)
 
 
 
-# City Routes
+
+  # Post.objects.get(id=post_id).delete()
+  # return redirect('profile')
+
+
+
+# CITY ROUTES
 
 def cities(request):
 	return render(request, 'cities/citydefault.html')
 
-
 def london(request):
-    
-  return render(request, 'cities/london.html')
+  posts = Post.objects.filter(city_id='3').order_by('-date')
+  print(posts)
+  context = {
+    'posts': posts
+  }
+  return render(request, 'cities/london.html', context)
 
 def sanfran(request):
-  
-  return render(request, 'cities/sanfran.html')
+  posts = Post.objects.filter(city_id='1').order_by('-date')
+  print(posts)
+  context = {
+    'posts': posts
+  }
+  return render(request, 'cities/sanfran.html', context)
 
 def seattle(request):
-  return render(request, 'cities/seattle.html')
+  posts = Post.objects.filter(city_id='2').order_by('-date')
+  print(posts)
+  context = {
+    'posts': posts
+  }
+  return render(request, 'cities/seattle.html', context)
 
 def sydney(request):
-  return render(request, 'cities/sydney.html')
+  posts = Post.objects.filter(city_id='4').order_by('-date')
+  print(posts)
+  context = {
+    'posts': posts
+  }
+  return render(request, 'cities/sydney.html', context)
 

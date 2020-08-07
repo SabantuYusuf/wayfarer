@@ -35,6 +35,18 @@ p {
     font-weight: 400;
 }
 
+a.city {
+    color: #4A4A4A;
+}
+
+a {
+    color:#275C7E;
+}
+
+/* a:hover {
+    color: #79ABCA !important;
+} */
+
 a:hover {
     color: #275C7E!important;
 }
@@ -171,14 +183,14 @@ a:hover {
 }
 
 .active {
-    background: lightblue;
+    background: #FAFAFA;
 }
 
 /* Homepage */
 .about {
     font-family: var(--play);
     font-weight: 700;
-    color: #275C7E;
+    color: #838383;
 }
 
 .slider-item {
@@ -187,7 +199,7 @@ a:hover {
 }
 
 /* City Routes */
-.cities {
+/* .cities {
     background: darkgrey;
-}
+} */
 
