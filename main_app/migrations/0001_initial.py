@@ -25,7 +25,8 @@ class Migration(migrations.Migration):
             name='Profile',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('city', models.CharField(blank=True, max_length=85, verbose_name='City')),
+                ('city', models.CharField(blank=True, max_length=85, verbose_name='Current City')),
+                ('prof_img', models.ImageField(blank=True, default='defaultpic.png', null=True, upload_to='media', verbose_name='Profile Image')),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
@@ -33,8 +34,9 @@ class Migration(migrations.Migration):
             name='Post',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('post_img', models.ImageField(default='stickynote.png', upload_to='media')),
                 ('content', models.CharField(blank=True, max_length=250, verbose_name='Content')),
-                ('date', models.DateField()),
+                ('date', models.DateField(auto_now_add=True)),
                 ('title', models.CharField(blank=True, max_length=100, verbose_name='Title')),
                 ('city', models.CharField(choices=[('SF', 'San Francisco'), ('L', 'London'), ('S', 'Seattle'), ('SY', 'Sydney')], default='SF', max_length=2, verbose_name='City')),
                 ('city_page', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='main_app.city')),

@@ -177,6 +177,10 @@ a:hover {
     padding-bottom: 20px;
 }
 
+.new-img {
+    width: 30vw !important; 
+}
+
 .post-container {
     display: flex;
     flex-direction: row;
@@ -203,3 +207,16 @@ a:hover {
     background: darkgrey;
 } */
 
+
+
+.column {
+  float: left !important;
+  width: 33.33% !important;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "" !important;
+  display: table !important;
+  clear: both !important;
+}

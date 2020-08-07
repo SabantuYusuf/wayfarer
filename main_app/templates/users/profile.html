@@ -6,11 +6,17 @@
 
 
 {% csrf_token %}
-<img class ="profpic" src="../static/images/defaultpic.png"/>
+<!-- <img class = "profpic" src="../static/images/defaultpic.png"/> -->
+{% if profile.prof_img %}
+    <img class = "profpic" src="{{ profile.prof_img.url }}"/>
+{% else %}
+    <img class="profpic" src="media/images/defaultpic.png"/>
+{% endif %}
+
 <h5>Name:  {{ profile.user.first_name}} {{ profile.user.last_name}}</h5>
 <h5>Location:  {{ profile.city }}</h5>
 
-<h5>Joined:  {{ profile.user.date_joined | localtime }}</h5>
+<h5>Joined:  {{ profile.user.date_joined | timezone:'US/Pacific' }} PST</h5>
 <br />
 <button> <a href="{% url 'edit_profile' %}">Edit Profile</a></button>
 <br />

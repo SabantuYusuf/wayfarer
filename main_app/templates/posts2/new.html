@@ -4,9 +4,8 @@
 
 <h1> Create a New Post </h1>
 
-  <form action="{% url 'new_post' %}" method="POST">
-    {% csrf_token %}
-   
+  <form action="{% url 'new_post' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}   
    {{ post_form.as_p }}
     <button type="submit">Create New Post</button> 
   </form>

@@ -5,23 +5,30 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as login
-from .forms import UserRegisterForm, ProfileRegisterForm, EditProfile, PostForm
+from .forms import UserRegisterForm, ProfileRegisterForm, EditProfile, PostForm, EditProfileCity
 
 
-# HOME
+# Create your views here.
+
+# Home
 def home(request):
 	return render(request, 'home.html')
 
 # USER ROUTES
 
+# About
+def about(request):
+  return render(request, 'about.html')
+
+
 # Sign Up
 def signup(request):
   error_message = ''
-  form = UserRegisterForm(request.POST)
-  p_reg_form = ProfileRegisterForm(request.POST)
+  prof_form = UserRegisterForm(request.POST, request.FILES)
+  p_reg_form = ProfileRegisterForm(request.POST, request.FILES)
   if request.method == 'POST':
-    if form.is_valid() and p_reg_form.is_valid():
-      user = form.save()
+    if prof_form.is_valid() and p_reg_form.is_valid():
+      user = prof_form.save()
       profile = p_reg_form.save(commit=False)
       profile.user = user
       profile.save()
@@ -29,10 +36,10 @@ def signup(request):
       return redirect('profile')
     else:
       error_message = 'Invalid sign up - try again'
-      form = UserRegisterForm()
+      prof_form = UserRegisterForm()
       p_reg_form = ProfileRegisterForm()
   context = {
-    'form': form, 
+    'prof_form': prof_form, 
     'p_reg_form': p_reg_form,
     'error_message': error_message,
   }
@@ -50,28 +57,35 @@ def profile(request):
     'profile': current_user,
     'posts': posts
   }
-  return render(request, 'users/profile.html', context)
+  if request.method == 'GET':
+    Profiles = Profile.objects.all()
+    return render(request, 'users/profile.html', context)
 
 # Edit Profile
 @login_required
 def edit_profile(request):
   user = request.user
   current_profile = Profile.objects.get(user=user)
-
   if request.method == 'POST':
-    form = EditProfile(request.POST, instance=user)
-    p_form = ProfileRegisterForm(request.POST, instance=current_profile)
+    # print("This is the thing ", request.POST['prof_img'])
+    form = EditProfile(request.POST, request.FILES, instance=user)
+    p_form = ProfileRegisterForm(request.POST, request.FILES, instance=current_profile)
+    
     if form.is_valid() and p_form.is_valid():
       user = form.save()
       print(f"USER {user}")
-      profile = p_form.save()
+      profile = p_form.save(commit=False)
+      profile.save() 
       login(request, user)
       return redirect('profile')
   else:
     form = EditProfile(instance=user)
     p_form = ProfileRegisterForm( instance=current_profile)
-  return render(request, 'users/edit.html', {'form': form, 'p_form': p_form})
-
+  context = {
+    'form': form, 
+    'p_form': p_form,
+  }
+  return render(request, 'users/edit.html', context)
 
 # POST ROUTES
 
@@ -79,7 +93,7 @@ def edit_profile(request):
 @login_required
 def new_post(request):
   if request.method == 'POST':
-    post_form = PostForm(request.POST)
+    post_form = PostForm(request.POST, request.FILES)
     if post_form.is_valid():
       new_post = post_form.save(commit=False)
       new_post.user = request.user
@@ -89,6 +103,7 @@ def new_post(request):
   else:
     post_form = PostForm()
     return render(request, 'posts2/new.html', {'post_form': post_form})
+    # , {'new_post': Posts}
 
 # Post Show Page
 def post(request, post_id):
@@ -97,7 +112,9 @@ def post(request, post_id):
     'post': post
   }
   print(post)
-  return render(request, 'posts2/postsshow.html', context)
+  if request.method == 'GET':
+    Posts = Post.objects.all()
+    return render(request, 'posts2/postsshow.html', context)
 
 # Delete Post
 @login_required
@@ -113,18 +130,12 @@ def delete_post(request, post_id):
       'error': error_message
     }  
     return render(request, 'cities/citydefault.html', context)
-# CAN WE ADD A POP UP INSTEAD OF REDIRECTING? (NEED TO ADD ERROR MESSAGE)
-
-
-
-
+# CAN WE ADD A POP UP INSTEAD OF REDIRECTING? (NEED TO ADD ERROR MESSAGE
   # Post.objects.get(id=post_id).delete()
   # return redirect('profile')
 
 
-
 # CITY ROUTES
-
 def cities(request):
 	return render(request, 'cities/citydefault.html')
 
@@ -135,6 +146,7 @@ def london(request):
     'posts': posts
   }
   return render(request, 'cities/london.html', context)
+
 
 def sanfran(request):
   posts = Post.objects.filter(city_id='1').order_by('-date')
@@ -159,4 +171,61 @@ def sydney(request):
     'posts': posts
   }
   return render(request, 'cities/sydney.html', context)
+
+# Edit Profile
+# def edit_profile(request, user_id):
+def edit_profile(request):
+  # current_profile = Profile.objects.get(user=user_id)
+  user = request.user
+  current_profile = Profile.objects.get(user=user)
+
+  if request.method == 'POST':
+    form = EditProfile(request.POST, instance=user)
+    # print(form)
+    p_form = ProfileRegisterForm(request.POST, instance=current_profile)
+    # print(p_form)
+    if form.is_valid() and p_form.is_valid():
+      user = form.save()
+      print(f"USER {user}")
+      profile = p_form.save()
+
+      # profile.user = user
+      
+      # print(f"PROFILE.USER {profile.user}")
+
+      # profile.save()
+      # user.id = current_profile.id
+      # return redirect('profile', profile.user.id)
+      login(request, user)
+      return redirect('profile')
+  else:
+    form = EditProfile(instance=user)
+    p_form = ProfileRegisterForm( instance=current_profile)
+  return render(request, 'users/edit.html', {'form': form, 'p_form': p_form})
+
+
+
+
+# def sanfran_new(request):
+#     if request.method == 'POST':
+#       post= PostForm(request.POST, request.FILES)
+#     if post_form.is_valid():
+#     # image = request.POST['image']
+#       new_post = post_form.save(commit=False)
+#       # user = Profile.ojects.get(user_id=user_id)
+#       new_post.user = request.user
+#       new_post.save()
+
+#       # return redirect('profile', new_post.id)
+#       return redirect('cities', new_post.id)
+#     else:
+#       post = PostForm()
+#       return render(request, 'posts2/new.html', {'post_form': post_form})
+
+
+
+
+# Credit = image upload = https://www.geeksforgeeks.org/python-uploading-images-in-django/
+# downloaded paperclip and pillow
+
 

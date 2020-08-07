@@ -8,7 +8,7 @@
     <div class="columns">
       <div class="column is-4"></div>
       <div class="column is-4">
-        <form action="{% url 'signup' %}" method="POST">
+        <form action="{% url 'signup' %}" method="POST" enctype="multipart/form-data">
               {% csrf_token %}
         
               {% for field in form %}
@@ -24,5 +24,9 @@
     </div>
   </div>
 </div>
+
+{% comment %} {{ prof_form.as_p }}
+
+{{ p_reg_form.as_p }} {% endcomment %}
 
 {% endblock %}
