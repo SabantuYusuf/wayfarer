@@ -25,12 +25,15 @@
 	<nav class="navbar" role="navigation" aria-label="main navigation">
 		<div class="navbar-brand">
 			<a class="navbar-item home-link" href="{% url 'home' %}"><img class="logo" src="../static/images/logo.png"/>Wayfarer</a>
+			
 		</div>
 		
 		<div class="navbar-end">
 			{% if user.is_authenticated %}
+
 			<a class="navbar-item" href="{% url 'cities' %}">Cities</a>
 			<a class="navbar-item" href="{% url 'new_post' %}">New Post</a>
+
 			<a class="navbar-item" href="{% url 'profile' %}">Profile</a>
 
 			<a class="navbar-item" href="{% url 'logout' %}">Log Out</a>
@@ -48,11 +51,32 @@
 	</main>
 
 	<footer class="footer">
+		{% comment %}
         <div class="content has-text-centered">
 				<p> 
 					Copyright &copy; <script>document.write(new Date().getFullYear())</script> <strong>Wayfarer</strong>
+					<a class="navbar-item" href="{% url 'cities' %}">Cities</a>
+					<a class="navbar-item" href="{% url 'about' %}">About</a>
+
+
 				</p>
 		</div>
+		{% endcomment %}
+
+
+		<div class="row">
+		  <div class="column">Cities
+		
+		  	<a href="{% url 'sydney' %}">Sydney</a> <br></div>
+		  	<a href="{% url 'seattle' %}">Seattle</a>
+		  	<a href="{% url 'sanfran' %}">San Francisco</a>
+		  	<a href="{% url 'london' %}">London</a>
+
+		  </div>
+		  <div class="column">2</div>
+		  <div class="column">3</div>
+		</div>
+		Copyright &copy; <script>document.write(new Date().getFullYear())</script> <strong>Wayfarer</strong>
     </footer>
 </body>
 </html>
