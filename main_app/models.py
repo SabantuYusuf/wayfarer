@@ -1,7 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+# CITY OPTIONS
+CITIES = (
+    ('SF', 'San Francisco'),
+    ('L', 'London'),
+    ('S', 'Seattle'),
+    ('SY', 'Sydney'),
+)
+
 # Create your Models here.
+# City Model
+class City(models.Model):
+	name = models.CharField(max_length=100)
+	# image = models.ImageField() 
+	# install pillow
 
 # Post Model
 class Post(models.Model):
@@ -10,7 +23,13 @@ class Post(models.Model):
     date = models.DateField()
     title = models.CharField("Title", max_length=100, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-# add actual city and author
+    city_options = models.CharField(
+        'City',
+        max_length=2,
+        choices=CITIES,
+        default=CITIES[0][0])
+    city = models.ForeignKey(City, on_delete=models.PROTECT)
+    
 
 # Profile model
 class Profile(models.Model):
@@ -18,8 +37,3 @@ class Profile(models.Model):
 	city = models.CharField("City", max_length=85, blank=True)
 
 
-# City Model
-class City(models.Model):
-	name = models.CharField(max_length=100)
-	# image = models.ImageField() 
-	# install pillow

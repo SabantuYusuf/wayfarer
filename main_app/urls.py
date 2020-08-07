@@ -23,8 +23,8 @@ urlpatterns =[
 	
 	# City Routes---
 	path('cities/', views.cities, name='cities'),
-	path('cities/london', views.london, name='london'),
-	path('cities/sanfran', views.sanfran, name='sanfran'),
-	path('cities/seattle', views.seattle, name='seattle'),
-	path('cities/sydney', views.sydney, name='sydney'),
+	path('cities/2', views.london, name='london'),
+	path('cities/1', views.sanfran, name='sanfran'),
+	path('cities/3', views.seattle, name='seattle'),
+	path('cities/4', views.sydney, name='sydney'),
 ]

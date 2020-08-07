@@ -29,6 +29,6 @@ class EditProfile(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('date', 'content', 'title')
+        fields = ['date', 'content', 'title', 'city']
         # add image and author to fields
 

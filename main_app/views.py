@@ -154,10 +154,12 @@ def cities(request):
 
 
 def london(request):
+    
   return render(request, 'cities/london.html')
 
 def sanfran(request):
-      return render(request, 'cities/sanfran.html')
+  
+  return render(request, 'cities/sanfran.html')
 
 def seattle(request):
   return render(request, 'cities/seattle.html')
