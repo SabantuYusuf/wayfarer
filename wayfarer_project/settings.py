@@ -132,4 +132,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
+DEFAULT_IMAGE_PATH = 'media/images/defaultpic.png'
+
 

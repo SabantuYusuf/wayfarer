@@ -31,16 +31,16 @@ def home(request):
 
 	return render(request, 'home.html')
 
-# User Routes
+# User Routes-----
 
 # Sign Up
 def signup(request):
   error_message = ''
-  form = UserRegisterForm(request.POST)
-  p_reg_form = ProfileRegisterForm(request.POST)
+  prof_form = UserRegisterForm(request.POST, request.FILES)
+  p_reg_form = ProfileRegisterForm(request.POST, request.FILES)
   if request.method == 'POST':
-    if form.is_valid() and p_reg_form.is_valid():
-      user = form.save()
+    if prof_form.is_valid() and p_reg_form.is_valid():
+      user = prof_form.save()
       profile = p_reg_form.save(commit=False)
       profile.user = user
       profile.save()
@@ -49,10 +49,10 @@ def signup(request):
       return redirect('profile')
     else:
       error_message = 'Invalid sign up - try again'
-      form = UserRegisterForm()
+      prof_form = UserRegisterForm()
       p_reg_form = ProfileRegisterForm()
   context = {
-    'form': form, 
+    'prof_form': prof_form, 
     'p_reg_form': p_reg_form,
     'error_message': error_message,
   }
@@ -76,7 +76,9 @@ def profile(request):
     'profile': current_user,
     'posts': posts
   }
-  return render(request, 'users/profile.html', context)
+  if request.method == 'GET':
+    Profiles = Profile.objects.all()
+    return render(request, 'users/profile.html', context)
 
 # Edit Profile
 # def edit_profile(request, user_id):
@@ -110,7 +112,7 @@ def edit_profile(request):
   return render(request, 'users/edit.html', {'form': form, 'p_form': p_form})
 
 
-# Post Routes
+# Post Routes------
 
 # Create (New) Post Route
 def new_post(request):
@@ -150,7 +152,7 @@ def delete_post(request, post_id):
 
 
 
-# City Routes
+# City Routes-----
 
 def cities(request):
 	return render(request, 'cities/citydefault.html')
@@ -167,3 +169,5 @@ def seattle(request):
 def sydney(request):
   return render(request, 'cities/sydney.html')
 
+
+# Credit = image upload = https://www.geeksforgeeks.org/python-uploading-images-in-django/

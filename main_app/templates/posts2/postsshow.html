@@ -10,7 +10,7 @@
     <p>Content: {{ post.content }}</p>
     <br />
     <button class="delete-button">
-        <a href="{% url 'delete_post' post.id %}">Delete</a>
+        <a href="{% url 'delete_post' post.id %}" onclick="return confirm(`Are you sure you want to delete '{{ post.title }}'?`)">Delete</a>
     </button>
 
 
