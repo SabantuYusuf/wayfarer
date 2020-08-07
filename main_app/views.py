@@ -33,7 +33,7 @@ def home(request):
 
 # About
 def about(request):
-  return HttpResponse('about')
+  return render(request, 'about.html')
 
 # User Routes
 
