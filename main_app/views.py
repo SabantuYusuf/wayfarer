@@ -210,5 +210,24 @@ def edit_profile(request):
 
 
 
+def sanfran_new(request):
+    if request.method == 'POST':
+      post= PostForm(request.POST, request.FILES)
+    if post_form.is_valid():
+    # image = request.POST['image']
+      new_post = post_form.save(commit=False)
+      # user = Profile.ojects.get(user_id=user_id)
+      new_post.user = request.user
+      new_post.save()
+
+      # return redirect('profile', new_post.id)
+      return redirect('cities', new_post.id)
+    else:
+      post = PostForm()
+      return render(request, 'posts2/new.html', {'post_form': post_form})
+
+
+
+
 # Credit = image upload = https://www.geeksforgeeks.org/python-uploading-images-in-django/
 
