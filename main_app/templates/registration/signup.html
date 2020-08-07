@@ -10,10 +10,15 @@
       <div class="column is-4">
         <form action="{% url 'signup' %}" method="POST" enctype="multipart/form-data">
               {% csrf_token %}
-        
               {% for field in form %}
               <label for="">{{ field.label }}</label>
               {{ field|add_class:"input" }}
+              
+              {% endfor %}
+              {% for field in p_reg_form %}
+              <label for="">{{ field.label }}</label>
+              {{ field|add_class:"input" }}
+              
               {% endfor %}
               <div class="buttons has-addons is-centered">
                 <button type="submit" class="button mt-4">Sign Up</button>

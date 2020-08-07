@@ -35,5 +35,16 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['post_img', 'content', 'title', 'city_options']
-        # add image and author to fields
+
+
+class EditPost(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['post_img', 'content', 'title', 'city_options']
+
+
+
+
+
+
 
