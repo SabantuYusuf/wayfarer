@@ -31,16 +31,16 @@ def home(request):
 
 	return render(request, 'home.html')
 
-# User Routes
+# User Routes-----
 
 # Sign Up
 def signup(request):
   error_message = ''
-  form = UserRegisterForm(request.POST)
-  p_reg_form = ProfileRegisterForm(request.POST)
+  prof_form = UserRegisterForm(request.POST, request.FILES)
+  p_reg_form = ProfileRegisterForm(request.POST, request.FILES)
   if request.method == 'POST':
-    if form.is_valid() and p_reg_form.is_valid():
-      user = form.save()
+    if prof_form.is_valid() and p_reg_form.is_valid():
+      user = prof_form.save()
       profile = p_reg_form.save(commit=False)
       profile.user = user
       profile.save()
@@ -49,10 +49,10 @@ def signup(request):
       return redirect('profile')
     else:
       error_message = 'Invalid sign up - try again'
-      form = UserRegisterForm()
+      prof_form = UserRegisterForm()
       p_reg_form = ProfileRegisterForm()
   context = {
-    'form': form, 
+    'prof_form': prof_form, 
     'p_reg_form': p_reg_form,
     'error_message': error_message,
   }
@@ -76,7 +76,9 @@ def profile(request):
     'profile': current_user,
     'posts': posts
   }
-  return render(request, 'users/profile.html', context)
+  if request.method == 'GET':
+    Profiles = Profile.objects.all()
+    return render(request, 'users/profile.html', context)
 
 # Edit Profile
 # def edit_profile(request, user_id):
@@ -110,12 +112,12 @@ def edit_profile(request):
   return render(request, 'users/edit.html', {'form': form, 'p_form': p_form})
 
 
-# Post Routes
+# Post Routes------
 
 # Create (New) Post Route
 def new_post(request):
   if request.method == 'POST':
-    post_form = PostForm(request.POST)
+    post_form = PostForm(request.POST, request.FILES)
     if post_form.is_valid():
     # image = request.POST['image']
       new_post = post_form.save(commit=False)
@@ -128,6 +130,7 @@ def new_post(request):
   else:
     post_form = PostForm()
     return render(request, 'posts2/new.html', {'post_form': post_form})
+    # , {'new_post': Posts}
 
 # Post Show Page
 def post(request, post_id):
@@ -136,7 +139,9 @@ def post(request, post_id):
     'post': post
   }
   print(post)
-  return render(request, 'posts2/postsshow.html', context)
+  if request.method == 'GET':
+    Posts = Post.objects.all()
+    return render(request, 'posts2/postsshow.html', context)
 
 
 # Delete Post
@@ -147,11 +152,10 @@ def delete_post(request, post_id):
 
 
 
-# City Routes
+# City Routes-----
 
 def cities(request):
 	return render(request, 'cities/citydefault.html')
-
 
 def london(request):
   return render(request, 'cities/london.html')
@@ -167,6 +171,7 @@ def sydney(request):
   return render(request, 'cities/sydney.html')
 
 
+<<<<<<< HEAD
 
 
 # Edit Profile
@@ -201,3 +206,6 @@ def edit_profile(request):
   return render(request, 'users/edit.html', {'form': form, 'p_form': p_form})
 
 
+=======
+# Credit = image upload = https://www.geeksforgeeks.org/python-uploading-images-in-django/
+>>>>>>> 39c0e53ac810d87fc9d749080fe12cb787227db5
