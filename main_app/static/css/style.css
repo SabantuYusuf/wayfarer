@@ -88,3 +88,16 @@ main {
     background: darkgrey;
 }
 
+
+
+.column {
+  float: left !important;
+  width: 33.33% !important;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "" !important;
+  display: table !important;
+  clear: both !important;
+}

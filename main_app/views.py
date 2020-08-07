@@ -15,7 +15,11 @@ def home(request):
 
 	return render(request, 'home.html')
 
-# User Routes-----
+
+# About
+def about(request):
+  return render(request, 'about.html')
+
 
 # Sign Up
 def signup(request):
@@ -142,6 +146,7 @@ def cities(request):
 def london(request):
   return render(request, 'cities/london.html')
 
+
 def sanfran(request):
       return render(request, 'cities/sanfran.html')
 
@@ -152,5 +157,62 @@ def sydney(request):
   return render(request, 'cities/sydney.html')
 
 
+
+
+# Edit Profile
+# def edit_profile(request, user_id):
+def edit_profile(request):
+  # current_profile = Profile.objects.get(user=user_id)
+  user = request.user
+  current_profile = Profile.objects.get(user=user)
+
+  if request.method == 'POST':
+    form = EditProfile(request.POST, instance=user)
+    # print(form)
+    p_form = ProfileRegisterForm(request.POST, instance=current_profile)
+    # print(p_form)
+    if form.is_valid() and p_form.is_valid():
+      user = form.save()
+      print(f"USER {user}")
+      profile = p_form.save()
+
+      # profile.user = user
+      
+      # print(f"PROFILE.USER {profile.user}")
+
+      # profile.save()
+      # user.id = current_profile.id
+      # return redirect('profile', profile.user.id)
+      login(request, user)
+      return redirect('profile')
+  else:
+    form = EditProfile(instance=user)
+    p_form = ProfileRegisterForm( instance=current_profile)
+  return render(request, 'users/edit.html', {'form': form, 'p_form': p_form})
+
+
+
+
+# def sanfran_new(request):
+#     if request.method == 'POST':
+#       post= PostForm(request.POST, request.FILES)
+#     if post_form.is_valid():
+#     # image = request.POST['image']
+#       new_post = post_form.save(commit=False)
+#       # user = Profile.ojects.get(user_id=user_id)
+#       new_post.user = request.user
+#       new_post.save()
+
+#       # return redirect('profile', new_post.id)
+#       return redirect('cities', new_post.id)
+#     else:
+#       post = PostForm()
+#       return render(request, 'posts2/new.html', {'post_form': post_form})
+
+
+
+
 # Credit = image upload = https://www.geeksforgeeks.org/python-uploading-images-in-django/
 # downloaded paperclip and pillow
+
+
