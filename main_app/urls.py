@@ -15,6 +15,7 @@ urlpatterns =[
 	path('posts/<int:post_id>', views.post, name='post'),
 	# New
 	path('posts/new', views.new_post, name='new_post'),
+	
 	# Delete
 	path('posts/<int:post_id>/delete', views.delete_post, name='delete_post'),
 	# City Routes---

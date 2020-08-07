@@ -12,6 +12,9 @@
     <button class="delete-button">
         <a href="{% url 'delete_post' post.id %}" onclick="return confirm(`Are you sure you want to delete '{{ post.title }}'?`)">Delete</a>
     </button>
+    <button class="edit-button">
+        <a href="{% url 'edit_post' post.id %}">Edit</a>
+    </button>
 
 
 {% endblock %}
