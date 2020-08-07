@@ -34,4 +34,13 @@ class EditProfileCity(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('post_img', 'title', 'content' )
+        fields = ['post_img', 'content', 'title', 'city_options']
+
+
+class EditPost(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['post_img', 'content', 'title', 'city_options']
+
+
+
