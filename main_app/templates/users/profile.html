@@ -15,7 +15,7 @@
 <h5>Name:  {{ profile.user.first_name}} {{ profile.user.last_name}}</h5>
 <h5>Location:  {{ profile.city }}</h5>
 
-<h5>Joined:  {{ profile.user.date_joined | localtime }}</h5>
+<h5>Joined:  {{ profile.user.date_joined | timezone:'US/Pacific' }} PST</h5>
 <br />
 <button> <a href="{% url 'edit_profile' %}">Edit Profile</a></button>
 <br />
