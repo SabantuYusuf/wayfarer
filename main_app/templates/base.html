@@ -24,14 +24,14 @@
 <body>
 	<nav class="navbar" role="navigation" aria-label="main navigation">
 		<div class="navbar-brand">
-			<a class="navbar-item home-link" href="{% url 'home' %}"><img class="logo" src="../static/images/logo.png"/>Wayfarer</a>
+			<a class="navbar-item" href="{% url 'home' %}"><i class="fas fa-globe-americas is-size-4 mr-3"></i><h1 class="is-size-4 nav-name">Wayfarer</h1></a>
+			{% comment %} <img class="logo" src="../static/images/logo.png"/> {% endcomment %}
 		</div>
 		<div class="navbar-end">
 			{% if user.is_authenticated %}
 			<a class="navbar-item" href="{% url 'cities' %}">Cities</a>
 			<a class="navbar-item" href="{% url 'new_post' %}">New Post</a>
 			<a class="navbar-item" href="{% url 'profile' %}">Profile</a>
-
 			<a class="navbar-item" href="{% url 'logout' %}">Log Out</a>
 			{% else %}
 			<a class="navbar-item" href="{% url 'cities' %}">Cities</a>
@@ -48,9 +48,17 @@
 
 	<footer class="footer">
         <div class="content has-text-centered">
-				<p> 
+			<div>
+				<p class="is-size-5"> 
 					Copyright &copy; <script>document.write(new Date().getFullYear())</script> <strong>Wayfarer</strong>
 				</p>
+			</div>
+			<div class="mt-3">
+				<a href="#"><i class="fab fa-instagram social is-size-3"></i></a>
+				<a href="#"><i class="fab fa-facebook social is-size-3"></i></a>
+				<a href="#"><i class="fab fa-twitter social is-size-3"></i></a>
+				<a href="#"><i class="fab fa-github social is-size-3"></i></a>
+			</div>	
 		</div>
     </footer>
 </body>
