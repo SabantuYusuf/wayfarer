@@ -51,6 +51,7 @@
 	</main>
 
 	<footer class="footer">
+		{% comment %}
         <div class="content has-text-centered">
 				<p> 
 					Copyright &copy; <script>document.write(new Date().getFullYear())</script> <strong>Wayfarer</strong>
@@ -60,6 +61,22 @@
 
 				</p>
 		</div>
+		{% endcomment %}
+
+
+		<div class="row">
+		  <div class="column">Cities
+		
+		  	<a href="{% url 'sydney' %}">Sydney</a> <br></div>
+		  	<a href="{% url 'seattle' %}">Seattle</a>
+		  	<a href="{% url 'sanfran' %}">San Francisco</a>
+		  	<a href="{% url 'london' %}">London</a>
+
+		  </div>
+		  <div class="column">2</div>
+		  <div class="column">3</div>
+		</div>
+		Copyright &copy; <script>document.write(new Date().getFullYear())</script> <strong>Wayfarer</strong>
     </footer>
 </body>
 </html>
