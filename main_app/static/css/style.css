@@ -54,6 +54,10 @@ main {
     padding-bottom: 20px;
 }
 
+.new-img {
+    width: 30vw !important; 
+}
+
 .post-container {
     display: flex;
     flex-direction: row;

@@ -3,17 +3,24 @@ from . import views
 
 urlpatterns =[
 	path('', views.home, name='home'),
+
 	# User Routes---
+
+	# Sign Up
 	path('accounts/signup/', views.signup, name='signup'),
 
-	# Post Routes---
-
 	# path('users/<int:user_id>', views.profile, name='profile'),
+
+	# Profile Page (Show)
 	path('users/', views.profile, name='profile'),
 
 	# path('users/<int:user_id>/edit', views.edit_profile, name='edit_profile'),
+
+	# Edit
 	path('users/edit/', views.edit_profile, name='edit_profile'),
-	# Post Routes
+
+	# Post Routes--
+
 	# Show
 	path('posts/<int:post_id>', views.post, name='post'),
 	# New
