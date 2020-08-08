@@ -38,15 +38,21 @@
         </div>
   </div>
   <div class="column is-7">
-      <img src="{% static 'images/seattle.jpg' %}" alt="">
+      <figure class="image">
+        <img src="{% static 'images/seattle.jpg' %}" alt="">
+      </figure>
+      <div>
+        <a href="{% url 'new_post' %}">
+          <button>New Post</button>
+        </a>
+      </div>
       <!-- POST CONTENT -->
     {% if posts.count %}
     {% for post in posts %}  
     <article class="media">
         <figure class="media-left">
           <p class="image is-64x64">
-            <img src="https://bulma.io/images/placeholders/128x128.png">
-          </p>
+    <img class="new-img" src="{{ post.post_img.url }}"/></p>
         </figure>
         <div class="media-content">
           <div class="content"> 
@@ -55,27 +61,11 @@
                 By: {{ post.user.first_name}} {{ post.user.last_name}}
                 <br/>{{ post.content }}</p>
           </div>
-          <nav class="level is-mobile">
-            <div class="level-left">
-              <a class="level-item">
-                <span class="icon is-small"><i class="fas fa-reply"></i></span>
-              </a>
-              <a class="level-item">
-                <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-              </a>
-              <a class="level-item">
-                <span class="icon is-small"><i class="fas fa-heart"></i></span>
-              </a>
-            </div>
-          </nav>
-        </div>
-        <div class="media-right">
-          <button class="delete"></button>
         </div>
       </article>
       {% endfor %}
       {% else %}
-      <h2>No Posts</h2>
+      <h2>No Posts Yet!</h2>
       {% endif %}
   </div>
 </div>

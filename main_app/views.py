@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as login
-from .forms import UserRegisterForm, ProfileRegisterForm, EditProfile, PostForm, EditProfileCity
+from .forms import UserRegisterForm, ProfileRegisterForm, EditProfile, PostForm, EditProfileCity, EditPost
 
 
 # Create your views here.
@@ -39,7 +39,7 @@ def signup(request):
       prof_form = UserRegisterForm()
       p_reg_form = ProfileRegisterForm()
   context = {
-    'prof_form': prof_form, 
+    'form': prof_form, 
     'p_reg_form': p_reg_form,
     'error_message': error_message,
   }
@@ -102,7 +102,6 @@ def new_post(request):
   else:
     post_form = PostForm()
     return render(request, 'posts2/new.html', {'post_form': post_form})
-    # , {'new_post': Posts}
 
 # Post Show Page
 def post(request, post_id):
@@ -132,6 +131,18 @@ def delete_post(request, post_id):
 # CAN WE ADD A POP UP INSTEAD OF REDIRECTING? (NEED TO ADD ERROR MESSAGE
   # Post.objects.get(id=post_id).delete()
   # return redirect('profile')
+
+# @login_required
+def edit_post(request, post_id):
+  current_post = Post.objects.get(id=post_id)
+  if request.method == 'POST':
+    form = EditPost(request.POST, request.FILES, instance=current_post)
+    if form.is_valid():
+      current_post = form.save()
+      return redirect('post', current_post.id)
+  else:
+    form = EditPost(instance=current_post)
+    return render(request, 'posts2/edit.html', {'form': form})
 
 
 # CITY ROUTES
@@ -171,36 +182,7 @@ def sydney(request):
   }
   return render(request, 'cities/sydney.html', context)
 
-# Edit Profile
-# def edit_profile(request, user_id):
-def edit_profile(request):
-  # current_profile = Profile.objects.get(user=user_id)
-  user = request.user
-  current_profile = Profile.objects.get(user=user)
 
-  if request.method == 'POST':
-    form = EditProfile(request.POST, instance=user)
-    # print(form)
-    p_form = ProfileRegisterForm(request.POST, instance=current_profile)
-    # print(p_form)
-    if form.is_valid() and p_form.is_valid():
-      user = form.save()
-      print(f"USER {user}")
-      profile = p_form.save()
-
-      # profile.user = user
-      
-      # print(f"PROFILE.USER {profile.user}")
-
-      # profile.save()
-      # user.id = current_profile.id
-      # return redirect('profile', profile.user.id)
-      login(request, user)
-      return redirect('profile')
-  else:
-    form = EditProfile(instance=user)
-    p_form = ProfileRegisterForm( instance=current_profile)
-  return render(request, 'users/edit.html', {'form': form, 'p_form': p_form})
 
 
 
@@ -225,5 +207,14 @@ def edit_profile(request):
 
 # Credit = image upload = https://www.geeksforgeeks.org/python-uploading-images-in-django/
 # downloaded paperclip and pillow
+
+
+
+
+
+
+
+
+
 
 

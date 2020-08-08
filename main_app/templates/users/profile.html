@@ -10,7 +10,7 @@
 {% if profile.prof_img %}
     <img class = "profpic" src="{{ profile.prof_img.url }}"/>
 {% else %}
-    <img class="profpic" src="media/images/defaultpic.png"/>
+    <img class="profpic" src="media/defaultpic.png"/>
 {% endif %}
 
 <h5>Name:  {{ profile.user.first_name}} {{ profile.user.last_name}}</h5>

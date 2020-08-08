@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from PIL import Image
 
 
-
 # CITY OPTIONS
 CITIES = (
     ('1', 'San Francisco'),
@@ -11,13 +10,11 @@ CITIES = (
     ('3', 'London'),
     ('4', 'Sydney'),
 )
-
 # Create your Models here.
 # City Model
 class City(models.Model):
 	name = models.CharField(max_length=100)
 	# image = models.ImageField() 
-	# install pillow
 
 # Post Model
 class Post(models.Model):
@@ -30,14 +27,12 @@ class Post(models.Model):
     city_options = models.CharField(
         'City',
         max_length=2,
-        choices=CITIES,
-        default=CITIES[0][0])
+        choices=CITIES,)
     city = models.ForeignKey(City, on_delete=models.PROTECT)
-    
+# add actual city
 
 # Profile model
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     city = models.CharField("Current City", max_length=85, blank=True)
     prof_img = models.ImageField("Profile Image", null=True, blank=True, upload_to='images/', default='defaultpic.png')
-
