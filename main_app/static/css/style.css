@@ -181,6 +181,27 @@ a.city {
     color: var(--darkgrey);
 }
 
+.london {
+    color: var(--hightlight);
+}
+
+.plus {
+    color: var(--mediumgrey)
+}
+
+.plus:hover {
+    color: var(--hightlight);
+}
+
+.create {
+    color: var(--hightlight);
+}
+
+.create:hover {
+    color: var(--mediumgrey)
+}
+
+
 /* .cities {
     background: darkgrey;
 } */
