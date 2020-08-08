@@ -9,7 +9,7 @@ class UserRegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'password1', 'password2']
+        fields = ['username', 'first_name', 'last_name','password1', 'password2']
 
 class ProfileRegisterForm(forms.ModelForm):
 
@@ -34,13 +34,13 @@ class EditProfileCity(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['post_img', 'content', 'title', 'city_options']
+        fields = ['title', 'content', 'city_options', 'post_img']
 
 
 class EditPost(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['post_img', 'content', 'title', 'city_options']
+        fields = ['title', 'content', 'post_img']
 
 
 

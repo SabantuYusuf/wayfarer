@@ -27,8 +27,7 @@ class Post(models.Model):
     city_options = models.CharField(
         'City',
         max_length=2,
-        choices=CITIES,
-        default=CITIES[0][0])
+        choices=CITIES,)
     city = models.ForeignKey(City, on_delete=models.PROTECT)
 # add actual city
 

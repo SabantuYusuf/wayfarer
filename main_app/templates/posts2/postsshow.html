@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <!-- <img class="post-image" src="../static/images/stickynote.png"/> -->
     <img class="new-img" src="{{ post.post_img.url }}"/>
     <h3>Title: {{ post.title }}</h3>
     <h3>Author:  {{ user.first_name}} {{ user.last_name}}</h3>
@@ -16,8 +15,6 @@
         <a href="{% url 'edit_post' post.id %}">Edit</a>
     </button>
 
-    <button><a href="{% url 'edit_post' post.id %}"> Edit </a></button>
-    
 
 
 {% endblock %}
