@@ -2,45 +2,82 @@
 {% block content %}
 {% load static %}
 
-<div class="columns">
-  <div class="column is-5 cities">
-        <div class="columns">
-            <figure class="column is-4 image is-128x128">
-                <img src="{% static 'images/london1.jpg' %}">
-              </figure>
-            <div class="column is-8 has-text-centered is-vcentered">
-                <a href="{% url 'london' %}" class="is-size-3 city">London</a>
-            </div>
+
+<!-- Left Nav Content -->
+<div class="columns my-4 mx-3">
+  <div class="column is-narrow">
+    <div class="box" style="width: 500px; box-shadow: none;">
+      <div class="columns is-vcentered box">
+        <div class="column is-one-third">
+          <figure class="image is-1by1">
+            <img src="{% static 'images/londonsquare.jpg' %}">
+          </figure>
         </div>
-        <div class="columns">
-            <figure class="column is-4 image is-128x128">
-                <img src="{% static 'images/sanfran.jpg' %}">
-              </figure>
-            <div class="column is-8 has-text-centered is-vcentered">
-                <a href="{% url 'sanfran' %}" class="is-size-3 city">San Francisco</a>
-            </div>
+        <div class="column">
+          <a href="{% url 'london' %}" class="is-size-2"><h2>London</h2></a>
         </div>
-        <div class="columns">
-            <figure class="column is-4 image is-128x128">
-                <img src="{% static 'images/seattle.jpg' %}">
-              </figure>
-            <div class="column is-8 has-text-centered is-vcentered">
-                <a href="{% url 'seattle' %}" class="is-size-3 city">Seattle</a>
-            </div>
+      </div>
+      <div class="columns is-vcentered box my-2">
+        <div class="column is-one-third">
+          <figure class="image is-1by1">
+            <img src="{% static 'images/sanfransquare.jpg' %}">
+          </figure>
         </div>
-        <div class="columns">
-            <figure class="column is-4 image is-128x128">
-                <img src="{% static 'images/sydney.jpg' %}">
-              </figure>
-            <div class="column is-8 has-text-centered is-vcentered">
-                <a href="{% url 'sydney' %}" class="is-size-3 city">Sydney</a>
-            </div>
+        <div class="column">
+          <a href="{% url 'sanfran' %}" class="is-size-2"><h2>San Francisco</h2></a>
         </div>
+      </div>
+      <div class="columns is-vcentered box my-2">
+        <div class="column is-one-third">
+          <figure class="image is-1by1">
+            <img src="{% static 'images/seattle2square.jpg' %}">
+          </figure>
+        </div>
+        <div class="column">
+          <a href="{% url 'seattle' %}" class="is-size-2"><h2>Seattle</h2></a>
+        </div>
+      </div>
+      <div class="columns is-vcentered box my-2">
+        <div class="column is-one-third">
+          <figure class="image is-1by1">
+            <img src="{% static 'images/sydneysquare.jpg' %}">
+          </figure>
+        </div>
+        <div class="column">
+          <a href="{% url 'sydney' %}" class="is-size-2"><h2>Sydney</h2></a>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="column is-7">
-      <img src="{% static 'images/cities.jpeg' %}" alt="">   
+<!-- Right side content -->
+  <div class="column">
+    <div class="box">
+
+      <div class="columns">
+        <div class="column is-two-fifths">
+          <h2 class="is-size-2 london">Welcome to Wayfarer!</h2>
+          <p class="is-size-4 london">Check out our favorite cities</p>
+          <i class="fas fa-arrow-left mx-2"></i><i class="fas fa-arrow-left mx-2"></i><i class="fas fa-arrow-left mx-2"></i>
+        </div>
+        <div class="column">
+          <figure class="image is-16by19">
+            <img src="{% static 'images/cities.jpeg' %}" alt="city image">
+          </figure>
+        </div>
+      </div>
+      <hr>    
+      <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi optio, suscipit libero voluptate fuga, consequuntur quasi cum in unde ex sapiente repudiandae doloribus pariatur officiis accusantium veniam dolores ratione! Sapiente?
+          Obcaecati earum cumque voluptas explicabo sapiente est corporis porro cum voluptates nemo labore, quia mollitia enim itaque maiores, sit tempore quo? Ipsam eos provident blanditiis atque velit officiis recusandae quas?
+          Rem aspernatur soluta repellat, ratione ipsam vitae quo adipisci sapiente nulla amet earum, animi et voluptatibus quos tenetur doloribus eaque facere placeat quas in. Illum, commodi. Dignissimos quaerat nobis eos.
+          Porro dolores suscipit aliquid eius, architecto repudiandae quos inventore nihil incidunt explicabo quae doloremque reiciendis ducimus exercitationem magni assumenda repellendus nostrum neque dicta! Corporis, error? Adipisci vitae vero odit repellat.
+          Voluptate, beatae molestiae nesciunt inventore consectetur earum a reprehenderit delectus obcaecati aspernatur praesentium quod, tenetur numquam soluta culpa sunt iure provident amet! Explicabo ipsa saepe est esse quisquam illo praesentium!
+      </p>
+      </div>
+    </div>
   </div>
+</div>
 
 
 {% endblock %}

@@ -70,19 +70,18 @@ def edit_profile(request):
     # print("This is the thing ", request.POST['prof_img'])
     e_form = EditProfile(request.POST, request.FILES, instance=user)
     p_form = ProfileRegisterForm(request.POST, request.FILES, instance=current_profile)
-    
     if e_form.is_valid() and p_form.is_valid():
       user = e_form.save()
       print(f"USER {user}")
       profile = p_form.save(commit=False)
-      profile.save() 
+      profile.save()
       login(request, user)
       return redirect('profile')
   else:
     e_form = EditProfile(instance=user)
     p_form = ProfileRegisterForm( instance=current_profile)
   context = {
-    'e_form': e_form, 
+    'e_form': e_form,
     'p_form': p_form,
   }
   return render(request, 'users/edit.html', context)
@@ -144,6 +143,18 @@ def edit_post(request, post_id):
     form = EditPost(instance=current_post)
     return render(request, 'posts2/edit.html', {'form': form})
 
+# @login_required
+def edit_post(request, post_id):
+  current_post = Post.objects.get(id=post_id)
+  if request.method == 'POST':
+    form = EditPost(request.POST, request.FILES, instance=current_post)
+    if form.is_valid():
+      current_post = form.save()
+      return redirect('post', current_post.id)
+  else:
+    form = EditPost(instance=current_post)
+    return render(request, 'posts2/edit.html', {'form': form})
+
 
 # CITY ROUTES
 def cities(request):
@@ -181,7 +192,6 @@ def sydney(request):
     'posts': posts
   }
   return render(request, 'cities/sydney.html', context)
-
 
 
 

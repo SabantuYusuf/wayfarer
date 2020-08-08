@@ -1,4 +1,3 @@
-
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
@@ -38,7 +37,6 @@ class Migration(migrations.Migration):
                 ('date', models.DateField(auto_now_add=True)),
                 ('title', models.CharField(blank=True, max_length=100, verbose_name='Title')),
                 ('city_options', models.CharField(choices=[('1', 'San Francisco'), ('3', 'London'), ('2', 'Seattle'), ('4', 'Sydney')], default='1', max_length=2, verbose_name='City')),
-
                 ('city', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='main_app.city')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],

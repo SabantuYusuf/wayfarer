@@ -8,8 +8,16 @@ font-family: 'Source Sans Pro', sans-serif; */
 :root {
     --play: 'Playfair Display', serif;
     --source: 'Source Sans Pro', sans-serif;
+    --dark: #4D6C7F;
+    --hightlight: #275C7E;
+    --medium: #79ABCA;
+    --lightgrey: #ADADAD;
+    --mediumgrey: #4A4A4A;
+    --darkgrey: #252525;
+
 }
 
+/* Main */
 main {
     min-height: 65vh;
 }
@@ -17,13 +25,6 @@ main {
 .footer {
     margin-bottom: 0;
 }
-
-/* Potential Colors? */
-/* #9ED7F4 NO
-#E5F4FC BACK
-#4D6C7F LIGHT
-#275C7E Hover
-#79ABCA LIGHT */
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--play);
@@ -35,65 +36,39 @@ p {
     font-weight: 400;
 }
 
-a.city {
-    color: #4A4A4A;
-}
-
 a {
-    color:#275C7E;
+    color: var(--mediumgrey) !important;
 }
-
-/* a:hover {
-    color: #79ABCA !important;
-} */
 
 a:hover {
-    color: #275C7E!important;
+    color: var(--hightlight) !important;
+}
+
+.blue {
+    color: var(--hightlight);
+}
+
+/* Navbar */
+.navname {
+    font-weight: 500 !important;
 }
 
 .navbar-end {
     font-weight: 400 !important;
 }
 
-/* Had to comment out because it was pushing all of the page content to the right */
-/* main {
-    margin-top: 50px;
-    margin-left: 30px;
-} */
-
-/* Navbar */
-.nav-name {
-    font-weight: 500 !important;
-}
-
 /* Footer */
 .social {
-    color: #4A4A4A !important;
+    color: var(--hightlight)!important;
 }
 
 .social:hover {
-    color: #275C7E!important;
+    color: var(--mediumgrey) !important;
 }
 
-
-/* Was breaking responsive - bulma does this for you */
-/* .navbar, .navbar-end {
-    display: flex;
-} */
-
-/* .navbar-brand {
-    width: 60%;
-} */
-
-/* .navbar-end {
-    margin-top: auto;
-    margin-bottom: auto;
-    float: right;
-} */
-
-/* .navbar {
-    background: lightblue;
-} */
+.footnav {
+    color: var(--mediumgrey);
+}
 
 /* Carousel */
 #slider, .wrap, .slide-content {
@@ -149,7 +124,6 @@ a:hover {
     color: white;
 }
 
-
 /* Logo */
 .logo {
     margin-right: 10px;
@@ -194,7 +168,7 @@ a:hover {
 .about {
     font-family: var(--play);
     font-weight: 700;
-    color: #838383;
+    color: var(--darkgrey);
 }
 
 .slider-item {
@@ -205,6 +179,31 @@ a:hover {
 
 
 /* City Routes */
+a.city {
+    color: var(--darkgrey);
+}
+
+.london {
+    color: var(--hightlight);
+}
+
+.plus {
+    color: var(--mediumgrey)
+}
+
+.plus:hover {
+    color: var(--hightlight);
+}
+
+.create {
+    color: var(--hightlight);
+}
+
+.create:hover {
+    color: var(--mediumgrey)
+}
+
+
 /* .cities {
     background: darkgrey;
 } */

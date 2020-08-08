@@ -1,13 +1,29 @@
 {% extends 'base.html' %}
+{% load templatetags %}
 
 {% block content %}
 
-<h1> Edit Post </h1>
-
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}   
-   {{ form.as_p }}
-    <button type="submit">Edit Post</button> 
-  </form>
+<div class="section">
+  <div class="containter">
+    <h1 class="title has-text-centered mt-4"> Edit Post </h1>
+    <div class="columns">
+      <div class="column is-4"></div>
+      <div class="column is-4">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}  
+          {% for field in form %}
+          <label for="">{{ field.label }}</label>
+          {{ field|add_class:"input" }}
+          {% endfor %} 
+          <div class="buttons has-addons is-centered">
+            <button type="submit" class="button mt-5 mb-4">Edit Post</button> 
+          </div
+        </form>
+        </div>
+      <div class="column is-4"></div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
+
