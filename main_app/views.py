@@ -130,8 +130,19 @@ def delete_post(request, post_id):
     }  
     return render(request, 'cities/citydefault.html', context)
 # CAN WE ADD A POP UP INSTEAD OF REDIRECTING? (NEED TO ADD ERROR MESSAGE
-  # Post.objects.get(id=post_id).delete()
-  # return redirect('profile')
+ 
+# Edit Post
+def edit_post(request, post_id):
+  current_post = Post.objects.get(id=post_id)
+
+  if request.method == 'POST':
+    form = EditPost(request.POST, request.FILES, instance=current_post)
+    if form.is_valid():
+      current_post = form.save()
+      return redirect('cities')
+  else:
+    form = EditPost(instance=current_post)
+    return render(request, 'posts2/edit.html', {'form': form})
 
 
 # CITY ROUTES
@@ -200,17 +211,7 @@ def sydney(request):
 
 
 
-def edit_post(request, post_id):
-  current_post = Post.objects.get(id=post_id)
 
-  if request.method == 'POST':
-    form = EditPost(request.POST, request.FILES, instance=current_post)
-    if form.is_valid():
-      current_post = form.save()
-      return redirect('cities')
-  else:
-    form = EditPost(instance=current_post)
-    return render(request, 'posts2/edit.html', {'form': form})
 
 
 

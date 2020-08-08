@@ -40,7 +40,7 @@ class PostForm(forms.ModelForm):
 class EditPost(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['post_img', 'content', 'title', 'city_options']
+        fields = ['post_img', 'content', 'title']
 
 
 

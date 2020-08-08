@@ -10,25 +10,16 @@
       <div class="column is-4">
         <form action="{% url 'signup' %}" method="POST" enctype="multipart/form-data">
               {% csrf_token %}
-<<<<<<< HEAD
+
               {% for field in form %}
-=======
-
-              {% for field in prof_form %}
-              <label for="">{{ field.label }}</label>
+                <label for="">{{ field.label }}</label>
               {{ field|add_class:"input" }}
+                
               {% endfor %}
 
               {% for field in p_reg_form %}
->>>>>>> submaster
               <label for="">{{ field.label }}</label>
               {{ field|add_class:"input" }}
-              
-              {% endfor %}
-              {% for field in p_reg_form %}
-              <label for="">{{ field.label }}</label>
-              {{ field|add_class:"input" }}
-              
               {% endfor %}
 
               <div class="buttons has-addons is-centered">
