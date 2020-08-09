@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<!-- Left Nav Content -->
+<div class="columns my-4 mx-3">
+  <div class="column is-narrow">
+    <div class="box" style="width: 500px; box-shadow: none;">
+      <div class="columns is-vcentered box">
+        <div class="column is-one-third">
+          <figure class="image is-1by1">
+            <img src="{% static 'images/londonsquare.jpg' %}">
+          </figure>
+        </div>
+        <div class="column">
+          <a href="{% url 'london' %}" class="is-size-2"><h2>London</h2></a>
+        </div>
+      </div>
+      <div class="columns is-vcentered box my-2">
+        <div class="column is-one-third">
+          <figure class="image is-1by1">
+            <img src="{% static 'images/sanfransquare.jpg' %}">
+          </figure>
+        </div>
+        <div class="column">
+          <a href="{% url 'sanfran' %}" class="is-size-2"><h2>San Francisco</h2></a>
+        </div>
+      </div>
+      <div class="columns is-vcentered box my-2 has-background-light">
+        <div class="column is-one-third">
+          <figure class="image is-1by1">
+            <img src="{% static 'images/seattle2square.jpg' %}">
+          </figure>
+        </div>
+        <div class="column">
+          <a href="#seattle" class="is-size-2"><h2 class="london">Seattle</h2></a>
+        </div>
+      </div>
+      <div class="columns is-vcentered box my-2">
+        <div class="column is-one-third">
+          <figure class="image is-1by1">
+            <img src="{% static 'images/sydneysquare.jpg' %}">
+          </figure>
+        </div>
+        <div class="column">
+          <a href="{% url 'sydney' %}" class="is-size-2"><h2>Sydney</h2></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Right side content -->
+  <div class="column">
+    <div class="box" id="seattle">
+
+      <div class="columns">
+        <div class="column is-two-fifths">
+          <h2 class="is-size-2 london">Seattle</h2>
+          <p class="is-size-4 london">United States</p>
+        </div>
+        <div class="column">
+          <figure class="image is-16by19">
+            <img src="{% static 'images/seattle2.jpg' %}" alt="Seattle image">
+          </figure>
+        </div>
+      </div>
+      <hr>    
+
+  <nav class="level mx-3">
+    <div class="level-left">
+      <p>
+        <h3 class="level-item is-size-4">Learn about Seattle</h3>
+      </p>
+    </div>
+    <div class="level-right">
+      <p class="level-item">
+        <a href="{% url 'new_post' %}" class="link is-info"><i class="fas fa-plus-circle is-size-2 plus"></i></a>
+      </p>
+    </div>
+  </nav>
+      {% if posts.count %}
+      {% for post in posts %}  
+      <article class="media mx-5">
+        <figure class="media-left">
+          <p class="image is-128x128">
+            <a href="{% url 'post' post.id %}"><img class="new-img" src="{{ post.post_img.url }}"/></a></p>
+        </figure>
+        <div class="media-content">
+          <div class="content"> 
+            <strong><a href="{% url 'post' post.id %}">{{ post.title }}</a></strong> <small>Date: {{ post.date }}</small>
+              <p>By: {{ post.user.first_name}} {{ post.user.last_name}}<br/>{{ post.content }}</p>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+      {% else %}
+      <h2>No Posts yet..</h2><a href="{% url 'new_post' %}"><h2 class="create">Create a post!</h2></a>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

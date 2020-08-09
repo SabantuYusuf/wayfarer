@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <img class="new-img" src="{{ post.post_img.url }}"/>
+    <h3>Title: {{ post.title }}</h3>
+    <h3>Author:  {{ user.first_name}} {{ user.last_name}}</h3>
+    <h3>Date Created: {{ post.date }} </h3>
+    <br />
+    <p>Content: {{ post.content }}</p>
+    <br />
+    <button class="delete-button">
+        <a href="{% url 'delete_post' post.id %}" onclick="return confirm(`Are you sure you want to delete '{{ post.title }}'?`)">Delete</a>
+    </button>
+    <button class="edit-button">
+        <a href="{% url 'edit_post' post.id %}">Edit</a>
+    </button>
+
+{% endblock %}

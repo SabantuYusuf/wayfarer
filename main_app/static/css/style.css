@@ -1,3 +1,223 @@
-body {
-	
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Source+Sans+Pro:wght@300;400;600&display=swap');
+/* font-family: 'Playfair Display', serif;
+font-family: 'Source Sans Pro', sans-serif; */
+
+
+/* Global Variables  */
+:root {
+    --play: 'Playfair Display', serif;
+    --source: 'Source Sans Pro', sans-serif;
+    --dark: #4D6C7F;
+    --hightlight: #275C7E;
+    --medium: #79ABCA;
+    --lightgrey: #ADADAD;
+    --mediumgrey: #4A4A4A;
+    --darkgrey: #252525;
+
 }
+
+/* Main */
+main {
+    min-height: 65vh;
+}
+
+.footer {
+    margin-bottom: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--play);
+    font-weight: 700;
+}
+
+p {
+    font-family: var(--source);
+    font-weight: 400;
+}
+
+a {
+    color: var(--mediumgrey) !important;
+}
+
+a:hover {
+    color: var(--hightlight) !important;
+}
+
+.blue {
+    color: var(--hightlight);
+}
+
+/* Navbar */
+.navname {
+    font-weight: 500 !important;
+}
+
+.navbar-end {
+    font-weight: 400 !important;
+}
+
+/* Footer */
+.social {
+    color: var(--hightlight)!important;
+}
+
+.social:hover {
+    color: var(--mediumgrey) !important;
+}
+
+.footnav {
+    color: var(--mediumgrey);
+}
+
+/* Carousel */
+#slider, .wrap, .slide-content {
+    margin: 0;
+    padding: 0; 
+    width: 100%;
+    height: 60vh; 
+    overflow-x: hidden;
+}
+
+.wrap {
+    position: relative;
+}
+
+.slide {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.slide1 {
+    background-image: url('../images/travel1.jpg');
+}
+
+.slide2 {
+    background-image: url('../images/bike1.jpg');
+}
+
+.slide3 {
+    background-image: url('../images/travel3.jpg');
+}
+
+.slide4 {
+    background-image: url('../images/travel4.jpg');
+}
+
+.arrow {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    margin-top: -30px;
+}
+
+#arrow-left {
+    left: 0;
+    margin-left: 30px;
+    color: white;
+}
+
+#arrow-right {
+    right: 0;
+    margin-right: 30px;
+    color: white;
+}
+
+/* Logo */
+.logo {
+    margin-right: 10px;
+    width: 6%;
+    height: 100%;
+}
+
+.profpic {
+    width: 20vw;
+}
+
+.title-link {
+    background: lightblue;
+    word-wrap: break-word;
+    padding: 10px;
+}
+
+.posts {
+    width: 30vw;
+    display: inline-block;
+}
+
+.post-image {
+    width: 20vw;
+    padding-bottom: 20px;
+}
+
+.new-img {
+    width: 30vw !important; 
+}
+
+.post-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.active {
+    background: #FAFAFA;
+}
+
+/* Homepage */
+.about {
+    font-family: var(--play);
+    font-weight: 700;
+    color: var(--darkgrey);
+}
+
+.slider-item {
+    max-height: 70vh;
+    align-self: center;
+}
+
+
+
+/* City Routes */
+a.city {
+    color: var(--darkgrey);
+}
+
+.london {
+    color: var(--hightlight);
+}
+
+.plus {
+    color: var(--mediumgrey)
+}
+
+.plus:hover {
+    color: var(--hightlight);
+}
+
+.create {
+    color: var(--hightlight);
+}
+
+.create:hover {
+    color: var(--mediumgrey)
+}
+
+
+/* .cities {
+    background: darkgrey;
+} */
+
+
+
+/*.column {
+  float: left !important;
+  width: 33.33% !important;
+}*/
+
+/* Clear floats after the columns */
+/*.row:after {
+  content: "" !important;
+  display: table !important;
+  clear: both !important;
+}*/
