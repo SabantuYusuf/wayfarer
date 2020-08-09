@@ -20,9 +20,9 @@ class City(models.Model):
 class Post(models.Model):
     # image = Image.open('../static/images/stickynote.png') 
     post_img = models.ImageField(upload_to='images/', default='stickynote.png')
-    content = models.CharField("Content", max_length=250, blank=True)
+    content = models.CharField("Content", max_length=250, blank=False)
     date = models.DateField(auto_now_add=True)
-    title = models.CharField("Title", max_length=100, blank=True)
+    title = models.CharField("Title", max_length=100, blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     city_options = models.CharField(
         'City',

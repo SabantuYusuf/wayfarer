@@ -20,6 +20,13 @@ def home(request):
 def about(request):
   return render(request, 'about.html')
 
+# Login
+def login(request):
+  error_message = 'work'
+  context = {
+    'error': error_message
+  }
+  return render(request, 'login.html', context)
 
 # Sign Up
 def signup(request):
@@ -27,6 +34,8 @@ def signup(request):
   prof_form = UserRegisterForm(request.POST, request.FILES)
   p_reg_form = ProfileRegisterForm(request.POST, request.FILES)
   if request.method == 'POST':
+    p1 = User.objects.filter(password = request.POST['password1'])
+    p2 = User.objects.filter(password = request.POST['password2'])
     if prof_form.is_valid() and p_reg_form.is_valid():
       user = prof_form.save()
       profile = p_reg_form.save(commit=False)
@@ -35,13 +44,18 @@ def signup(request):
       login(request, user)
       return redirect('profile')
     else:
-      error_message = 'Invalid sign up - try again'
-      prof_form = UserRegisterForm()
-      p_reg_form = ProfileRegisterForm()
+      if User.objects.filter(username = request.POST['username']).exists():
+        error_message = 'Username already exists'
+      elif p1 != p2:
+        error_message = 'Password does not match'
+      else:
+        error_message = 'Invalid sign up - try again'
+        prof_form = UserRegisterForm()
+        p_reg_form = ProfileRegisterForm()
   context = {
     'form': prof_form, 
     'p_reg_form': p_reg_form,
-    'error_message': error_message,
+    'error': error_message,
   }
   return render(request, 'registration/signup.html', context)
 
@@ -124,25 +138,38 @@ def delete_post(request, post_id):
     return redirect('profile')
   else:
     error_message = 'You can only delete your own post'
+    post = Post.objects.get(id=post_id)
     context = {
-      'error': error_message
-    }  
-    return render(request, 'cities/citydefault.html', context)
+      'error': error_message,
+      'post': post
+    }
+    return render(request, 'posts2/postsshow.html', context)
 # CAN WE ADD A POP UP INSTEAD OF REDIRECTING? (NEED TO ADD ERROR MESSAGE
   # Post.objects.get(id=post_id).delete()
   # return redirect('profile')
 
-# @login_required
+@login_required
 def edit_post(request, post_id):
+  error_message = ''
   current_post = Post.objects.get(id=post_id)
-  if request.method == 'POST':
-    form = EditPost(request.POST, request.FILES, instance=current_post)
-    if form.is_valid():
-      current_post = form.save()
-      return redirect('post', current_post.id)
+  print(current_post.user)
+  if request.user is current_post.user:
+    if request.method == 'POST':
+      form = EditPost(request.POST, request.FILES, instance=current_post)
+      if form.is_valid():
+        current_post = form.save()
+        return redirect('post', current_post.id)
+    else:
+      form = EditPost(instance=current_post)
+      return render(request, 'posts2/edit.html', {'form': form})
   else:
-    form = EditPost(instance=current_post)
-    return render(request, 'posts2/edit.html', {'form': form})
+    error_message = 'You can only edit your own post'
+    post = Post.objects.get(id=post_id)
+    context = {
+      'error': error_message,
+      'post': post
+    }
+    return render(request, 'posts2/postsshow.html', context)
 
 
 # CITY ROUTES
