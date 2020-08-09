@@ -11,7 +11,7 @@ font-family: 'Source Sans Pro', sans-serif; */
     --dark: #4D6C7F;
     --hightlight: #275C7E;
     --medium: #79ABCA;
-    --lightgrey: #ADADAD;
+    --lightgrey: #FAFAFA;
     --mediumgrey: #4A4A4A;
     --darkgrey: #252525;
 
@@ -20,6 +20,10 @@ font-family: 'Source Sans Pro', sans-serif; */
 /* Main */
 main {
     min-height: 65vh;
+}
+
+nav {
+    background-color: var(--lightgrey) !important;
 }
 
 .footer {
@@ -41,11 +45,15 @@ a {
 }
 
 a:hover {
-    color: var(--hightlight) !important;
+    color: rgb(255,127,80) !important;
 }
 
 .blue {
     color: var(--hightlight);
+}
+
+.orange {
+    color: rgb(255,127,80)!important;
 }
 
 /* Navbar */
@@ -168,7 +176,6 @@ a:hover {
 .about {
     font-family: var(--play);
     font-weight: 700;
-    color: var(--darkgrey);
 }
 
 .slider-item {

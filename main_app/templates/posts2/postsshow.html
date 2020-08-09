@@ -1,22 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <img class="new-img" src="{{ post.post_img.url }}"/>
-    <h3>Title: {{ post.title }}</h3>
-    <h3>Author:  {{ user.first_name}} {{ user.last_name}}</h3>
-    <h3>Date Created: {{ post.date }} </h3>
-    <br />
-    <p>Content: {{ post.content }}</p>
-    <br />
-    <button class="delete-button">
-        <a href="{% url 'delete_post' post.id %}" onclick="return confirm(`Are you sure you want to delete '{{ post.title }}'?`)">Delete</a>
-    </button>
-    <button class="edit-button">
-        <a href="{% url 'edit_post' post.id %}">Edit</a>
-    </button>
-
-    <h1 class="has-text-danger">{{ error }}</h1>
-
-
+<div class="columns my-6">
+    <div class="column"></div>
+    {% csrf_token %}
+    <div class="column">
+    <div class="card">
+      <div class="card-image">
+        <figure class="image-fluid is-4by3">
+            <img src="{{ post.post_img.url }}"/></p>
+        </figure>
+      </div>
+      <div class="card-content">
+        <div class="media">
+          <div class="media-content">
+            <h2 class="is-size-3">{{ post.title }}</h2>
+            <p class="">By: {{ post.user.first_name}} {{ post.user.last_name}}</p>
+            <p class="">Date: {{ post.date }}</p>
+            <p class="">City: {{ post.city.name }}</p>
+            <p class="">{{ post.content }}</p>
+          </div>
+        </div>
+        <div>
+            <button class="button">
+                <a href="{% url 'delete_post' post.id %}" onclick="return confirm(`Are you sure you want to delete '{{ post.title }}'?`)">Delete</a>
+                </button>
+                <button class="button">
+                    <a href="{% url 'edit_post' post.id %}">Edit</a>
+                </button>
+                <h1 class="mt-2 has-text-danger">{{ error }}</h1>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="column"></div>
+</div>
 
 {% endblock %}

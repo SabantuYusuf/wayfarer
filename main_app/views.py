@@ -20,13 +20,6 @@ def home(request):
 def about(request):
   return render(request, 'about.html')
 
-# Login
-def login(request):
-  error_message = 'work'
-  context = {
-    'error': error_message
-  }
-  return render(request, 'login.html', context)
 
 # Sign Up
 def signup(request):
@@ -74,6 +67,20 @@ def profile(request):
   if request.method == 'GET':
     Profiles = Profile.objects.all()
     return render(request, 'users/profile.html', context)
+
+# Public Profile
+def profiles(request, id):
+  user = User.objects.get(id = id)
+  current_user = Profile.objects.get(user=user)
+  print(user)
+  posts = Post.objects.filter(user=user)
+  print(user)
+  context = {
+    'profile': current_user,
+    'posts': posts
+  }
+  return render(request, 'users/profiles.html', context)
+
 
 # Edit Profile
 @login_required
