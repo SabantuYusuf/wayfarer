@@ -131,19 +131,7 @@ def delete_post(request, post_id):
 # CAN WE ADD A POP UP INSTEAD OF REDIRECTING? (NEED TO ADD ERROR MESSAGE
  
 # Edit Post
-def edit_post(request, post_id):
-  current_post = Post.objects.get(id=post_id)
-
-  if request.method == 'POST':
-    form = EditPost(request.POST, request.FILES, instance=current_post)
-    if form.is_valid():
-      current_post = form.save()
-      return redirect('cities')
-  else:
-    form = EditPost(instance=current_post)
-    return render(request, 'posts2/edit.html', {'form': form})
-
-# @login_required
+@login_required
 def edit_post(request, post_id):
   current_post = Post.objects.get(id=post_id)
   if request.method == 'POST':
@@ -192,27 +180,6 @@ def sydney(request):
     'posts': posts
   }
   return render(request, 'cities/sydney.html', context)
-
-
-
-
-
-# def sanfran_new(request):
-#     if request.method == 'POST':
-#       post= PostForm(request.POST, request.FILES)
-#     if post_form.is_valid():
-#     # image = request.POST['image']
-#       new_post = post_form.save(commit=False)
-#       # user = Profile.ojects.get(user_id=user_id)
-#       new_post.user = request.user
-#       new_post.save()
-
-#       # return redirect('profile', new_post.id)
-#       return redirect('cities', new_post.id)
-#     else:
-#       post = PostForm()
-#       return render(request, 'posts2/new.html', {'post_form': post_form})
-
 
 
 
