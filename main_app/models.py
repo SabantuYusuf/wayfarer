@@ -32,4 +32,4 @@ class Post(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     city = models.CharField("Current City", max_length=85, blank=True)
-    prof_img = models.ImageField("Profile Image", null=True, blank=True, upload_to='images/', default='defaultpic2.png')
+    prof_img = models.ImageField("Profile Image", null=True, blank=True, upload_to='images/', default='defaultpic.png')
