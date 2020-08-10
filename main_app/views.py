@@ -67,13 +67,14 @@ def profile(request):
 
 # Public Profile
 def profiles(request, id):
-  user = User.objects.get(id = id)
-  current_user = Profile.objects.get(user=user)
-  print(user)
-  posts = Post.objects.filter(user=user)
-  print(user)
+  public_user = User.objects.get(id=id)
+  profile = Profile.objects.get(user=public_user)
+  # current_post = Post.objects.filter(id = id)
+  # user = Post.objects.filter(id__in=current_post.values('user'))
+  print(public_user)
+  posts = Post.objects.filter(user=public_user)
   context = {
-    'profile': current_user,
+    'profile': profile,
     'posts': posts
   }
   return render(request, 'users/profiles.html', context)

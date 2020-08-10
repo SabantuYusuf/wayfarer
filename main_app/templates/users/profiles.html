@@ -10,7 +10,7 @@
             {% csrf_token %}
             <div class="card">
               <div class="card-image">
-                <figure class="image is-4by3">
+                <figure class="image is-4by2">
                     <img src="{{ profile.prof_img.url }}" alt="Profile Picture"/>
                 </figure>
               </div>
@@ -27,7 +27,7 @@
               </div>
             </div>
         </div>
-        <div class="column">
+        <div class="column is-one-third">
       {% if posts.count %}
       {% for post in posts %}  
       <article class="media mx-5">
@@ -39,6 +39,7 @@
           <div class="content"> 
             <strong class="orange"><a href="{% url 'post' post.id %}">{{ post.title }}</a></strong> 
             <br><small>Date: {{ post.date }}</small>
+            <p>City: {{ post.city.name }}</p>
               <p>{{ post.content }}</p>
           </div>
         </div>
