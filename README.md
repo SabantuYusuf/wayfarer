@@ -27,6 +27,12 @@
 9. Click on the title of one of their posts and be redirected to a "show" page for that post.
 10. View post "show" pages with title, author, and content.
 
+**Bonuses**
+A user should be able to:
+
+1. See a "default" profile photo on their profile page before adding their own photo.
+2. Update their profile photo (consider using Paperclip or Uploadcare).
+
 ---
 
 ## Sprint 2: CRUD
@@ -52,6 +58,11 @@
 - See a pop-up that says: "Are you sure you want to delete #{title}?"
 - If the user confirms, delete the post.
 
+**Bonuses**
+A user should be able to:
+
+1. Visit city pages via pretty urls, like "/cities/san-francisco".
+
 ---
 
 ## Sprint 3: Validations & Authorization
@@ -72,9 +83,24 @@ A user is authorized to perform certain actions on the site, according to the fo
 6. A user MUST be logged in to create/update/destroy resources.
 7. A user may only edit their own profile and edit/delete their own posts.
 
+**Bonuses**
+A user should be able to:
+
+1. View an error message when form validations fail, for the following validations:
+- Content must not be empty.
+
 <img src="wireframes.png">
 
 <img src="./ERD.jpeg">
 
+## Technologies 
 
+Pillow 
+Paperclip
+Bulma
+Django
+Python
+JS
+CSS
+HTML
 
