@@ -129,7 +129,8 @@ LOGIN_REDIRECT_URL = 'profile'
 LOGOUT_REDIRECT_URL = 'home'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),'/main_app/static/',
+    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'wayfarer_project/static'),
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -138,6 +139,6 @@ MEDIA_URL = '/media/'
 
 DEFAULT_IMAGE_PATH = 'media/defaultpic.png'
 
-django_on_heroku.settings(locals())
+django_on_heroku.settings(locals)
 
 
