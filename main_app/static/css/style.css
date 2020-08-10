@@ -53,7 +53,6 @@ a:hover {
     color: rgb(255,127,80)!important;
 }
 
-
 /* Navbar */
 .navname {
     font-weight: 500 !important;
@@ -130,46 +129,6 @@ a:hover {
     color: white;
 }
 
-/* Logo */
-.logo {
-    margin-right: 10px;
-    width: 6%;
-    height: 100%;
-}
-
-.profpic {
-    width: 20vw;
-}
-
-.title-link {
-    background: lightblue;
-    word-wrap: break-word;
-    padding: 10px;
-}
-
-.posts {
-    width: 30vw;
-    display: inline-block;
-}
-
-.post-image {
-    width: 20vw;
-    padding-bottom: 20px;
-}
-
-.new-img {
-    width: 30vw !important; 
-}
-
-.post-container {
-    display: flex;
-    flex-direction: row;
-}
-
-.active {
-    background: #FAFAFA;
-}
-
 /* Homepage */
 .about {
     font-family: var(--play);
@@ -182,12 +141,7 @@ a:hover {
 }
 
 
-
 /* City Routes */
-a.city {
-    color: var(--darkgrey);
-}
-
 .london {
     color: var(--hightlight);
 }
