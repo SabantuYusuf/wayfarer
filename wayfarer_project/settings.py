@@ -12,10 +12,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import django_on_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -128,13 +128,15 @@ LOGIN_REDIRECT_URL = 'profile'
 LOGOUT_REDIRECT_URL = 'home'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'wayfarer_project/static')
+    os.path.join(BASE_DIR, 'main_app/static'),
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
-DEFAULT_IMAGE_PATH = 'media/images/defaultpic.png'
+DEFAULT_IMAGE_PATH = 'media/defaultpic.png'
+
+django_on_heroku.settings(locals())
 
 
