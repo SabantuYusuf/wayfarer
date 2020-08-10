@@ -9,7 +9,8 @@ urlpatterns =[
 	path('accounts/signup/', views.signup, name='signup'),
 	# Profile Page (Show)
 	path('users/', views.profile, name='profile'),
-	path('users/(?P<id>[\w\-]+)/$', views.profiles, name='profiles'),
+	# NEEDS FUTURE WORK
+	# path('users/(?P<id>[\w\-]+)/$', views.profiles, name='profiles'),
 	# ^^ Credits: https://stackoverflow.com/questions/41125152/view-profile-page-as-another-user-in-django/41267943
 	# Edit
 	path('users/edit/', views.edit_profile, name='edit_profile'),
