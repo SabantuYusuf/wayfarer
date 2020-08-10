@@ -7,9 +7,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as login
 from .forms import UserRegisterForm, ProfileRegisterForm, EditProfile, PostForm, EditProfileCity, EditPost
 
-
-# Create your views here.
-
 # Home
 def home(request):
 	return render(request, 'home.html')
@@ -27,6 +24,8 @@ def signup(request):
   prof_form = UserRegisterForm(request.POST, request.FILES)
   p_reg_form = ProfileRegisterForm(request.POST, request.FILES)
   if request.method == 'POST':
+    p1 = User.objects.filter(password = request.POST['password1'])
+    p2 = User.objects.filter(password = request.POST['password2'])
     if prof_form.is_valid() and p_reg_form.is_valid():
       user = prof_form.save()
       profile = p_reg_form.save(commit=False)
@@ -35,13 +34,18 @@ def signup(request):
       login(request, user)
       return redirect('profile')
     else:
-      error_message = 'Invalid sign up - try again'
-      prof_form = UserRegisterForm()
-      p_reg_form = ProfileRegisterForm()
+      if User.objects.filter(username = request.POST['username']).exists():
+        error_message = 'Username already exists'
+      elif p1 != p2:
+        error_message = 'Password does not match'
+      else:
+        error_message = 'Invalid sign up - try again'
+        prof_form = UserRegisterForm()
+        p_reg_form = ProfileRegisterForm()
   context = {
     'form': prof_form, 
     'p_reg_form': p_reg_form,
-    'error_message': error_message,
+    'error': error_message,
   }
   return render(request, 'registration/signup.html', context)
 
@@ -61,13 +65,27 @@ def profile(request):
     Profiles = Profile.objects.all()
     return render(request, 'users/profile.html', context)
 
+# Public Profile
+def profiles(request, id):
+  public_user = User.objects.get(id=id)
+  profile = Profile.objects.get(user=public_user)
+  # current_post = Post.objects.filter(id = id)
+  # user = Post.objects.filter(id__in=current_post.values('user'))
+  print(public_user)
+  posts = Post.objects.filter(user=public_user)
+  context = {
+    'profile': profile,
+    'posts': posts
+  }
+  return render(request, 'users/profiles.html', context)
+
+
 # Edit Profile
 @login_required
 def edit_profile(request):
   user = request.user
   current_profile = Profile.objects.get(user=user)
   if request.method == 'POST':
-    # print("This is the thing ", request.POST['prof_img'])
     e_form = EditProfile(request.POST, request.FILES, instance=user)
     p_form = ProfileRegisterForm(request.POST, request.FILES, instance=current_profile)
     if e_form.is_valid() and p_form.is_valid():
@@ -124,24 +142,36 @@ def delete_post(request, post_id):
     return redirect('profile')
   else:
     error_message = 'You can only delete your own post'
+    post = Post.objects.get(id=post_id)
     context = {
-      'error': error_message
-    }  
-    return render(request, 'cities/citydefault.html', context)
-# CAN WE ADD A POP UP INSTEAD OF REDIRECTING? (NEED TO ADD ERROR MESSAGE
+      'error': error_message,
+      'post': post
+    }
+    return render(request, 'posts2/postsshow.html', context)
  
 # Edit Post
 @login_required
 def edit_post(request, post_id):
+  error_message = ''
   current_post = Post.objects.get(id=post_id)
-  if request.method == 'POST':
-    form = EditPost(request.POST, request.FILES, instance=current_post)
-    if form.is_valid():
-      current_post = form.save()
-      return redirect('post', current_post.id)
+  print(current_post.user)
+  if request.user == current_post.user:
+    if request.method == 'POST':
+      form = EditPost(request.POST, request.FILES, instance=current_post)
+      if form.is_valid():
+        current_post = form.save()
+        return redirect('post', current_post.id)
+    else:
+      form = EditPost(instance=current_post)
+      return render(request, 'posts2/edit.html', {'form': form})
   else:
-    form = EditPost(instance=current_post)
-    return render(request, 'posts2/edit.html', {'form': form})
+    error_message = 'You can only edit your own post'
+    post = Post.objects.get(id=post_id)
+    context = {
+      'error': error_message,
+      'post': post
+    }
+    return render(request, 'posts2/postsshow.html', context)
 
 
 # CITY ROUTES

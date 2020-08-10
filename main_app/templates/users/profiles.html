@@ -23,14 +23,12 @@
                 </div>
             
                 <div class="content">
-                    <p class="subtitle is-6">Joined: {{ profile.user.date_joined | timezone:'US/Pacific' }} PST</p>
-                    <button class="button"> <a href="{% url 'edit_profile' %}">Edit Profile</a></button>
-                </div>
+                    <p class="subtitle is-6">Joined: {{ profile.user.date_joined | timezone:'US/Pacific' }} PST</p>                </div>
               </div>
             </div>
         </div>
         <div class="column is-one-third">
-            {% if posts.count %}
+      {% if posts.count %}
       {% for post in posts %}  
       <article class="media mx-5">
         <figure class="media-left">

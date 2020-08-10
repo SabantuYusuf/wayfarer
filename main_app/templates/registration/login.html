@@ -5,6 +5,9 @@
 <div class="section">
   <div class="containter">
     <h1 class="title has-text-centered mt-4"> Log In </h1>
+    {% if form.errors %}
+    <h3 class="has-text-danger has-text-centered">Username or password is incorrect</h3>
+    {% endif %}
     <div class="columns">
       <div class="column is-4"></div>
       <div class="column is-4">
