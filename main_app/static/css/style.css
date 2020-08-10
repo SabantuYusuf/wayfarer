@@ -8,18 +8,19 @@ font-family: 'Source Sans Pro', sans-serif; */
 :root {
     --play: 'Playfair Display', serif;
     --source: 'Source Sans Pro', sans-serif;
-    --dark: #4D6C7F;
     --hightlight: #275C7E;
-    --medium: #79ABCA;
-    --lightgrey: #ADADAD;
-    --mediumgrey: #4A4A4A;
+    --lightgrey: #FAFAFA;
     --darkgrey: #252525;
-
+    --orange: rgb(255,127,80);
 }
 
 /* Main */
 main {
     min-height: 65vh;
+}
+
+nav {
+    background-color: var(--lightgrey) !important;
 }
 
 .footer {
@@ -41,11 +42,15 @@ a {
 }
 
 a:hover {
-    color: var(--hightlight) !important;
+    color: rgb(255,127,80) !important;
 }
 
 .blue {
     color: var(--hightlight);
+}
+
+.orange {
+    color: rgb(255,127,80)!important;
 }
 
 /* Navbar */
@@ -124,51 +129,10 @@ a:hover {
     color: white;
 }
 
-/* Logo */
-.logo {
-    margin-right: 10px;
-    width: 6%;
-    height: 100%;
-}
-
-.profpic {
-    width: 20vw;
-}
-
-.title-link {
-    background: lightblue;
-    word-wrap: break-word;
-    padding: 10px;
-}
-
-.posts {
-    width: 30vw;
-    display: inline-block;
-}
-
-.post-image {
-    width: 20vw;
-    padding-bottom: 20px;
-}
-
-.new-img {
-    width: 30vw !important; 
-}
-
-.post-container {
-    display: flex;
-    flex-direction: row;
-}
-
-.active {
-    background: #FAFAFA;
-}
-
 /* Homepage */
 .about {
     font-family: var(--play);
     font-weight: 700;
-    color: var(--darkgrey);
 }
 
 .slider-item {
@@ -177,18 +141,13 @@ a:hover {
 }
 
 
-
 /* City Routes */
-a.city {
-    color: var(--darkgrey);
-}
-
 .london {
     color: var(--hightlight);
 }
 
 .plus {
-    color: var(--mediumgrey)
+    color: var(--orange)
 }
 
 .plus:hover {
@@ -202,22 +161,3 @@ a.city {
 .create:hover {
     color: var(--mediumgrey)
 }
-
-
-/* .cities {
-    background: darkgrey;
-} */
-
-
-
-/*.column {
-  float: left !important;
-  width: 33.33% !important;
-}*/
-
-/* Clear floats after the columns */
-/*.row:after {
-  content: "" !important;
-  display: table !important;
-  clear: both !important;
-}*/

@@ -24,7 +24,7 @@
           </figure>
         </div>
         <div class="column">
-          <a href="#sanfran" class="is-size-2"><h2 class="london">San Francisco</h2></a>
+          <a href="#sanfran" class="is-size-2"><h2 class="orange">San Francisco</h2></a>
         </div>
       </div>
       <div class="columns is-vcentered box my-2">
@@ -67,18 +67,16 @@
       </div>
       <hr>    
 
-  <nav class="level mx-3">
+  <section class="level mx-3">
     <div class="level-left">
-      <p>
         <h3 class="level-item is-size-4">Learn about San Francisco</h3>
-      </p>
     </div>
     <div class="level-right">
       <p class="level-item">
         <a href="{% url 'new_post' %}" class="link is-info"><i class="fas fa-plus-circle is-size-2 plus"></i></a>
       </p>
     </div>
-  </nav>
+  </section >
       {% if posts.count %}
       {% for post in posts %}  
       <article class="media mx-5">
@@ -88,14 +86,14 @@
         </figure>
         <div class="media-content">
           <div class="content"> 
-            <strong><a href="{% url 'post' post.id %}">{{ post.title }}</a></strong> <small>Date: {{ post.date }}</small>
+            <strong class="london"><a href="{% url 'post' post.id %}">{{ post.title }}</a></strong> <small>Date: {{ post.date }}</small>
               <p>By: {{ post.user.first_name}} {{ post.user.last_name}}<br/>{{ post.content }}</p>
           </div>
         </div>
       </article>
       {% endfor %}
       {% else %}
-      <h2>No Posts yet..</h2><a href="{% url 'new_post' %}"><h2 class="create">Create a post!</h2></a>
+      <h2>No Posts yet...</h2><a href="{% url 'new_post' %}"><h2 class="create">Create a post!</h2></a>
       {% endif %}
       </div>
     </div>
