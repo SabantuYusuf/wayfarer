@@ -139,6 +139,4 @@ DEFAULT_IMAGE_PATH = 'media/defaultpic.png'
 
 django_on_heroku.settings(locals())
 
-django_on_heroku.settings(locals())
-
 
