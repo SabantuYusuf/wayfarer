@@ -5,43 +5,30 @@
 
 <section class="section">
     <div class="columns">
-        <div class="column ml-6 is-two-fifths">
+        
+        <div class="column is-one-third is-offset-2">
             {% csrf_token %}
             <div class="card">
               <div class="card-image">
                 <figure class="image is-4by3">
-                    {% if profile.prof_img %}
                     <img src="{{ profile.prof_img.url }}" alt="Profile Picture"/>
-                    {% else %}
-                    <img src="media/defaultpic2.png" alt="Placeholder image"/>
-                    {% endif %}
                 </figure>
               </div>
               <div class="card-content">
                 <div class="media">
-                  <div class="media-left">
-                    <figure class="image is-48x48">
-                        {% if profile.prof_img %}
-                        <img src="{{ profile.prof_img.url }}" alt="Profile Picture"/>
-                        {% else %}
-                        <img src="media/defaultpic2.png" alt="Placeholder image"/>
-                        {% endif %}
-                    </figure>
-                  </div>
                   <div class="media-content">
-                    <p class="title is-4">{{ profile.user.first_name}} {{ profile.user.last_name}}</p>
+                    <p class="title is-4 london">{{ profile.user.first_name}} {{ profile.user.last_name}}</p>
                     <p class="subtitle is-6">{{ profile.city }}</p>
                   </div>
                 </div>
             
                 <div class="content">
-                    <p class="subtitle is-6">Joined: {{ profile.user.date_joined | timezone:'US/Pacific' }} PST</p>
-                </div>
+                    <p class="subtitle is-6">Joined: {{ profile.user.date_joined | timezone:'US/Pacific' }} PST</p>                </div>
               </div>
             </div>
         </div>
-        <div class="column is-one-quarter">
-            {% if posts.count %}
+        <div class="column">
+      {% if posts.count %}
       {% for post in posts %}  
       <article class="media mx-5">
         <figure class="media-left">
@@ -50,8 +37,9 @@
         </figure>
         <div class="media-content">
           <div class="content"> 
-            <strong><a href="{% url 'post' post.id %}">{{ post.title }}</a></strong> <small>Date: {{ post.date }}</small>
-              <p>By: {{ post.user.first_name}} {{ post.user.last_name}}<br/>{{ post.content }}</p>
+            <strong class="orange"><a href="{% url 'post' post.id %}">{{ post.title }}</a></strong> 
+            <br><small>Date: {{ post.date }}</small>
+              <p>{{ post.content }}</p>
           </div>
         </div>
       </article>

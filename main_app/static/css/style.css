@@ -8,13 +8,10 @@ font-family: 'Source Sans Pro', sans-serif; */
 :root {
     --play: 'Playfair Display', serif;
     --source: 'Source Sans Pro', sans-serif;
-    --dark: #4D6C7F;
     --hightlight: #275C7E;
-    --medium: #79ABCA;
     --lightgrey: #FAFAFA;
-    --mediumgrey: #4A4A4A;
     --darkgrey: #252525;
-
+    --orange: rgb(255,127,80);
 }
 
 /* Main */
@@ -55,6 +52,7 @@ a:hover {
 .orange {
     color: rgb(255,127,80)!important;
 }
+
 
 /* Navbar */
 .navname {
@@ -183,6 +181,8 @@ a:hover {
     align-self: center;
 }
 
+
+
 /* City Routes */
 a.city {
     color: var(--darkgrey);
@@ -193,7 +193,7 @@ a.city {
 }
 
 .plus {
-    color: var(--mediumgrey)
+    color: var(--orange)
 }
 
 .plus:hover {
@@ -207,22 +207,3 @@ a.city {
 .create:hover {
     color: var(--mediumgrey)
 }
-
-
-/* .cities {
-    background: darkgrey;
-} */
-
-
-
-/*.column {
-  float: left !important;
-  width: 33.33% !important;
-}*/
-
-/* Clear floats after the columns */
-/*.row:after {
-  content: "" !important;
-  display: table !important;
-  clear: both !important;
-}*/

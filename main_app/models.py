@@ -10,29 +10,26 @@ CITIES = (
     ('3', 'London'),
     ('4', 'Sydney'),
 )
-# Create your Models here.
+
 # City Model
 class City(models.Model):
 	name = models.CharField(max_length=100)
-	# image = models.ImageField() 
 
 # Post Model
 class Post(models.Model):
-    # image = Image.open('../static/images/stickynote.png') 
     post_img = models.ImageField(upload_to='images/', default='stickynote.png')
     content = models.CharField("Content", max_length=250, blank=False)
     date = models.DateField(auto_now_add=True)
-    title = models.CharField("Title", max_length=100, blank=False)
+    title = models.CharField("Title", max_length=200, blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     city_options = models.CharField(
         'City',
         max_length=2,
         choices=CITIES,)
     city = models.ForeignKey(City, on_delete=models.PROTECT)
-# add actual city
 
 # Profile model
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     city = models.CharField("Current City", max_length=85, blank=True)
-    prof_img = models.ImageField("Profile Image", null=True, blank=True, upload_to='images/', default='defaultpic.png')
+    prof_img = models.ImageField("Profile Image", null=True, blank=True, upload_to='images/', default='defaultpic2.png')

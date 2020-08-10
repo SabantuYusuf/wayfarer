@@ -7,9 +7,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as login
 from .forms import UserRegisterForm, ProfileRegisterForm, EditProfile, PostForm, EditProfileCity, EditPost
 
-
-# Create your views here.
-
 # Home
 def home(request):
 	return render(request, 'home.html')
@@ -88,7 +85,6 @@ def edit_profile(request):
   user = request.user
   current_profile = Profile.objects.get(user=user)
   if request.method == 'POST':
-    # print("This is the thing ", request.POST['prof_img'])
     e_form = EditProfile(request.POST, request.FILES, instance=user)
     p_form = ProfileRegisterForm(request.POST, request.FILES, instance=current_profile)
     if e_form.is_valid() and p_form.is_valid():
@@ -151,16 +147,14 @@ def delete_post(request, post_id):
       'post': post
     }
     return render(request, 'posts2/postsshow.html', context)
-# CAN WE ADD A POP UP INSTEAD OF REDIRECTING? (NEED TO ADD ERROR MESSAGE
-  # Post.objects.get(id=post_id).delete()
-  # return redirect('profile')
-
+ 
+# Edit Post
 @login_required
 def edit_post(request, post_id):
   error_message = ''
   current_post = Post.objects.get(id=post_id)
   print(current_post.user)
-  if request.user is current_post.user:
+  if request.user == current_post.user:
     if request.method == 'POST':
       form = EditPost(request.POST, request.FILES, instance=current_post)
       if form.is_valid():
@@ -215,27 +209,6 @@ def sydney(request):
     'posts': posts
   }
   return render(request, 'cities/sydney.html', context)
-
-
-
-
-
-# def sanfran_new(request):
-#     if request.method == 'POST':
-#       post= PostForm(request.POST, request.FILES)
-#     if post_form.is_valid():
-#     # image = request.POST['image']
-#       new_post = post_form.save(commit=False)
-#       # user = Profile.ojects.get(user_id=user_id)
-#       new_post.user = request.user
-#       new_post.save()
-
-#       # return redirect('profile', new_post.id)
-#       return redirect('cities', new_post.id)
-#     else:
-#       post = PostForm()
-#       return render(request, 'posts2/new.html', {'post_form': post_form})
-
 
 
 
