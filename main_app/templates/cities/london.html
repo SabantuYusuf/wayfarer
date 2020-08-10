@@ -86,13 +86,13 @@
         <div class="media-content">
           <div class="content"> 
             <strong class="london"><a href="{% url 'post' post.id %}">{{ post.title }}</a></strong> <small>Date: {{ post.date }}</small>
-              <p>By: <a href="{% url 'profiles' user.id %}">{{ post.user.first_name}} {{ post.user.last_name}}</a><br/>{{ post.content }}</p>
+              <p>By: {{ post.user.first_name}} {{ post.user.last_name}}<br/>{{ post.content }}</p>
           </div>
         </div>
       </article>
       {% endfor %}
       {% else %}
-      <h2>No Posts yet..</h2><a href="{% url 'new_post' %}"><h2 class="create">Create a post!</h2></a>
+      <h2>No Posts yet...</h2><a href="{% url 'new_post' %}"><h2 class="create">Create a post!</h2></a>
       {% endif %}
       </div>
     </div>
