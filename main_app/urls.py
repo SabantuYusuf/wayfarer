@@ -24,8 +24,8 @@ urlpatterns =[
 	path('posts/<int:post_id>/delete', views.delete_post, name='delete_post'),
 	# City Routes---
 	path('cities/', views.cities, name='cities'),
-	path('cities/2', views.london, name='london'),
-	path('cities/1', views.sanfran, name='sanfran'),
-	path('cities/3', views.seattle, name='seattle'),
-	path('cities/4', views.sydney, name='sydney'),
+	path('cities/london', views.london, name='london'),
+	path('cities/san-francisco', views.sanfran, name='sanfran'),
+	path('cities/seattle', views.seattle, name='seattle'),
+	path('cities/sydney', views.sydney, name='sydney'),
 ]
