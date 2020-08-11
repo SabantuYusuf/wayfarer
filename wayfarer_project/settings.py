@@ -131,11 +131,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'main_app/static'),
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'main_app/fileimages')
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'main_app/fileimages/'
 
-DEFAULT_IMAGE_PATH = 'media/defaultpic.png'
+DEFAULT_IMAGE_PATH = 'fileimages/defaultpic2.png'
 
 django_on_heroku.settings(locals())
 

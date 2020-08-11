@@ -17,7 +17,7 @@ class City(models.Model):
 
 # Post Model
 class Post(models.Model):
-    post_img = models.ImageField(upload_to='images/', default='images/stickynote.png')
+    post_img = models.ImageField(upload_to='images/', default='stickynote2.png')
     content = models.CharField("Content", max_length=250, blank=False)
     date = models.DateField(auto_now_add=True)
     title = models.CharField("Title", max_length=200, blank=False)
@@ -32,4 +32,4 @@ class Post(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     city = models.CharField("Current City", max_length=85, blank=True)
-    prof_img = models.ImageField("Profile Image", null=True, blank=True, upload_to='images/', default='images/defaultpic.png')
+    prof_img = models.ImageField("Profile Image", null=True, blank=True, upload_to='images/', default='defaultpic2.png')
