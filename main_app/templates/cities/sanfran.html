@@ -82,7 +82,11 @@
       <article class="media mx-5">
         <figure class="media-left">
           <p class="image is-128x128">
-            <a href="{% url 'post' post.id %}"><img src="{{ post.post_img.url }}"/></a></p>
+            {% if post.post_img %}
+            <a href="{% url 'post' post.id %}"><img src="{{ post.post_img.url }}" alt="Profile Picture"/></a></p>
+            {% else %}
+            <a href="{% url 'post' post.id %}"><img src="../static/images/stickynote2.png" alt="Placeholder image"/></a></p>
+            {% endif %}        
         </figure>
         <div class="media-content">
           <div class="content"> 
