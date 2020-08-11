@@ -8,7 +8,12 @@
     <div class="card">
       <div class="card-image">
         <figure class="image-fluid is-4by3">
-            <img src="{{ post.post_img.url }}"/></p>
+            {% if post.post_img %}
+                <img src="{{ post.post_img.url }}" alt="Profile Picture"/>
+            {% else %}
+                <img src="../fileimages/stickynote2.png" alt="Placeholder image"/>
+            {% endif %}
+           
         </figure>
       </div>
       <div class="card-content">

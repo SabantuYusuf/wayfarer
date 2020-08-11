@@ -17,7 +17,6 @@ import django_on_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -132,11 +131,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'main_app/static/'),
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'main_app/fileimages')
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'main_app/fileimages/'
 
-DEFAULT_IMAGE_PATH = 'media/images/defaultpic.png'
+DEFAULT_IMAGE_PATH = 'fileimages/defaultpic2.png'
 
 django_on_heroku.settings(locals())
 
