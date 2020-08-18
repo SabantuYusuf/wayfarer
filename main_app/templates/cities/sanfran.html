@@ -4,7 +4,7 @@
 
 
 <!-- Left Nav Content -->
-<div class="columns my-4 mx-3">
+<div class="columns my-4">
   <div class="column is-narrow">
     <div class="box" style="width: 500px; box-shadow: none;">
       <div class="columns is-vcentered box">
@@ -52,10 +52,9 @@
 
 <!-- Right side content -->
   <div class="column">
-    <div class="box" id="sanfran">
-
-      <div class="columns">
-        <div class="column is-two-fifths">
+    <div class="box mx-2" id="sanfran">
+      <div class="columns is-mobile px-4 py-4">
+        <div class="column">
           <h2 class="is-size-2 london">San Francisco</h2>
           <p class="is-size-4 london">United States</p>
         </div>
@@ -67,7 +66,7 @@
       </div>
       <hr>    
 
-  <section class="level mx-3">
+  <section class="level px-4">
     <div class="level-left">
         <h3 class="level-item is-size-4">Learn about San Francisco</h3>
     </div>
@@ -79,7 +78,7 @@
   </section >
       {% if posts.count %}
       {% for post in posts %}  
-      <article class="media mx-5">
+      <article class="media px-5 py-4">
         <figure class="media-left">
           <p class="image is-128x128">
             {% if post.post_img %}
