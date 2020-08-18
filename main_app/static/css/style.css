@@ -53,6 +53,11 @@ a:hover {
     color: rgb(255,127,80)!important;
 }
 
+.image img { 
+    height: 100% !important; 
+    object-fit: cover !important; 
+}
+
 /* Navbar */
 .navname {
     font-weight: 500 !important;

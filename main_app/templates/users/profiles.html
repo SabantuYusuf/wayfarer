@@ -14,7 +14,7 @@
                   {% if profile.prof_img %}
                     <img src="{{ profile.prof_img.url }}" alt="Profile Picture"/>
                     {% else %}
-                    <img src="../fileimages/defaultpic2.png" alt="Placeholder image"/>
+                    <img src="../static/images/defaultpic2.png" alt="Placeholder image"/>
                     {% endif %}
                 </figure>
               </div>
@@ -43,7 +43,6 @@
           <div class="content"> 
             <strong class="orange"><a href="{% url 'post' post.id %}">{{ post.title }}</a></strong> 
             <br><small>Date: {{ post.date }}</small>
-            <p>City: {{ post.city.name }}</p>
               <p>{{ post.content }}</p>
           </div>
         </div>
