@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="columns my-6">
+<div class="columns my-6 mx-2">
     <div class="column"></div>
     {% csrf_token %}
     <div class="column">
     <div class="card">
       <div class="card-image">
-        <figure class="image-fluid is-4by3">
-            <img src="{{ post.post_img.url }}"/></p>
+        <figure class="image is-1by1">
+            {% if post.post_img %}
+                <img src="{{ post.post_img.url }}" alt="Profile Picture"/>
+            {% else %}
+                <img src="../static/images/stickynote2.png" alt="Placeholder image"/>
+            {% endif %}
         </figure>
       </div>
       <div class="card-content">
